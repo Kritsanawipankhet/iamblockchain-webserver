@@ -12,11 +12,3 @@ export type TClient = {
   error_description?: string;
   error_code?: number;
 };
-
-// export type TErrorClient = {
-//   state: string;
-//   error: string;
-//   error_description: string;
-//   error_code?: number;
-//   error_uri?: string;
-// };

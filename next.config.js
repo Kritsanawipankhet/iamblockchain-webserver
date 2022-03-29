@@ -10,6 +10,9 @@ const nextConfig = {
     MNEMONIC_PHRASE: process.env.MNEMONIC_PHRASE,
     IAM_CONTRACT_ADDRESS: process.env.IAM_CONTRACT_ADDRESS,
   },
+  images: {
+    domains: ["avatars.githubusercontent.com"],
+  },
 };
 
 module.exports = nextConfig;

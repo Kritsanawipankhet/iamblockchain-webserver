@@ -1,0 +1,53 @@
+.DashedConnection {
+  position: relative;
+}
+
+.DashedConnection::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  content: "";
+  border-bottom: 2px dashed #d0d7de;
+}
+
+.DashedConnection .CircleBadge {
+  position: relative;
+}
+
+.CircleBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0 3px 6px rgba(140, 149, 159, 0.15);
+}
+
+.CircleBadgeMedium {
+  width: 96px;
+  height: 96px;
+}
+
+.CircleBadgeSmall {
+  width: 56px;
+  height: 56px;
+}
+
+.CircleBadgeIcon {
+  max-width: 60% !important;
+  height: auto !important;
+  max-height: 55% !important;
+}
+
+.CircleEmphasis {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+}
+
+.Octicon {
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom !important;
+  fill: currentColor;
+}
