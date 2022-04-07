@@ -1,13 +1,17 @@
 import React, { SVGProps } from "react";
 
-export const GithubIcon = ({ className }: SVGProps<SVGSVGElement>) => {
+export const GithubIcon = ({
+  className,
+  height = 16,
+  width = 16,
+}: SVGProps<SVGSVGElement>) => {
   return (
     <svg
       aria-hidden="true"
-      height="16"
+      height={height}
       viewBox="0 0 16 16"
       version="1.1"
-      width="16"
+      width={width}
       data-view-component="true"
       className={className}
     >

@@ -44,10 +44,3 @@
   width: 32px;
   height: 32px;
 }
-
-.Octicon {
-  display: inline-block;
-  overflow: visible !important;
-  vertical-align: text-bottom !important;
-  fill: currentColor;
-}

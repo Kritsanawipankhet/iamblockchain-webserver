@@ -1,13 +1,17 @@
 import React, { SVGProps } from "react";
 
-export const FacebookIcon = ({ className }: SVGProps<SVGSVGElement>) => {
+export const FacebookIcon = ({
+  className,
+  height = 16,
+  width = 16,
+}: SVGProps<SVGSVGElement>) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
       viewBox="0 0 512 512"
-      height="16"
-      width="16"
+      height={height}
+      width={width}
       data-view-component="true"
       className={className}
     >

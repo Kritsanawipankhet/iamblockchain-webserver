@@ -1,6 +1,6 @@
 import React, { SVGProps } from "react";
 
-export const EmphasisIcon = ({
+export const CircleSlashIcon = ({
   className,
   height = 16,
   width = 16,
@@ -17,7 +17,7 @@ export const EmphasisIcon = ({
     >
       <path
         fillRule="evenodd"
-        d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"
+        d="M1.5 8a6.5 6.5 0 0110.535-5.096l-9.131 9.131A6.472 6.472 0 011.5 8zm2.465 5.096a6.5 6.5 0 009.131-9.131l-9.131 9.131zM8 0a8 8 0 100 16A8 8 0 008 0z"
       ></path>
     </svg>
   );

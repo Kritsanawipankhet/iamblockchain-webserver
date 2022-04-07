@@ -11,6 +11,15 @@
   border-bottom: 1px solid #d0d7de;
 }
 
+.BoxFooter {
+  padding: 16px;
+  margin-top: -1px;
+  border-top-color: #d0d7de;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-radius: 0 0 6px 6px;
+}
+
 .Avatar {
   display: inline-block;
   overflow: hidden;
@@ -24,4 +33,33 @@
 
 .AvatarUser {
   border-radius: 50% !important;
+}
+
+.btn {
+  color: #24292f;
+  background-color: #f6f8fa;
+  border-color: rgba(27, 31, 36, 0.15);
+  box-shadow: 0 1px 0 rgba(27, 31, 36, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transition: 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  transition-property: color, background-color, border-color;
+}
+
+.btn:hover {
+  background-color: #f3f4f6;
+  border-color: rgba(27, 31, 36, 0.15);
+  transition-duration: 0.1s;
+}
+
+.btnPrimary {
+  color: #ffffff;
+  background-color: #007bff;
+  border-color: rgba(27, 31, 36, 0.15);
+  box-shadow: 0 1px 0 rgba(27, 31, 36, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.btnPrimary:hover {
+  background-color: #0069d9;
+  border-color: rgba(27, 31, 36, 0.15);
 }

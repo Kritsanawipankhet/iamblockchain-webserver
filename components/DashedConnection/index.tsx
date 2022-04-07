@@ -19,21 +19,21 @@ export default function DashedConnection({}: Props) {
             className={`${Index.CircleBadge} ${Index.CircleBadgeMedium} ${Styles.colorBgWhite} ${Styles.overflowHidden}`}
           >
             <FacebookIcon
-              className={`${Index.Octicon} ${Styles.widthFull}  ${Styles.heightFull}`}
+              className={`${Styles.Octicon} ${Styles.widthFull}  ${Styles.heightFull}`}
             />
           </div>
           <div
-            className={`${Index.CircleEmphasis} ${Styles.positionRelative} ${Styles.colorBgSuccess} ${Styles.textCenter}`}
+            className={`${Index.CircleEmphasis} ${Styles.positionRelative} ${Styles.colorBgPrimary} ${Styles.textCenter}`}
           >
             <EmphasisIcon
-              className={`${Index.Octicon} ${Styles.colorFgOnEmphasis} ${Styles.mt2}`}
+              className={`${Styles.Octicon} ${Styles.colorFgOnEmphasis} ${Styles.mt2}`}
             />
           </div>
           <div
             className={`${Index.CircleBadge} ${Index.CircleBadgeMedium} ${Styles.colorBgWhite} ${Styles.overflowHidden}`}
           >
             <GithubIcon
-              className={`${Index.Octicon} ${Styles.widthFull}  ${Styles.heightFull}`}
+              className={`${Styles.Octicon} ${Styles.widthFull}  ${Styles.heightFull}`}
             />
           </div>
         </div>
@@ -49,21 +49,21 @@ export default function DashedConnection({}: Props) {
             className={`${Index.CircleBadge} ${Index.CircleBadgeSmall} ${Styles.colorBgWhite} ${Styles.overflowHidden}`}
           >
             <FacebookIcon
-              className={`${Index.Octicon} ${Styles.widthFull}  ${Styles.heightFull}`}
+              className={`${Styles.Octicon} ${Styles.widthFull}  ${Styles.heightFull}`}
             />
           </div>
           <div
-            className={`${Index.CircleEmphasis} ${Styles.positionRelative} ${Styles.colorBgSuccess} ${Styles.textCenter}`}
+            className={`${Index.CircleEmphasis} ${Styles.positionRelative} ${Styles.colorBgPrimary} ${Styles.textCenter}`}
           >
             <EmphasisIcon
-              className={`${Index.Octicon} ${Styles.colorFgOnEmphasis} ${Styles.mt2}`}
+              className={`${Styles.Octicon} ${Styles.colorFgOnEmphasis} ${Styles.mt2}`}
             />
           </div>
           <div
             className={`${Index.CircleBadge} ${Index.CircleBadgeSmall} ${Styles.colorBgWhite} ${Styles.overflowHidden}`}
           >
             <GithubIcon
-              className={`${Index.Octicon} ${Styles.widthFull}  ${Styles.heightFull}`}
+              className={`${Styles.Octicon} ${Styles.widthFull}  ${Styles.heightFull}`}
             />
           </div>
         </div>

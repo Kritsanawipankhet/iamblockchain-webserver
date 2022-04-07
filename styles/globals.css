@@ -66,3 +66,7 @@ strong {
 small {
   font-size: 90%;
 }
+
+button {
+  cursor: pointer;
+}

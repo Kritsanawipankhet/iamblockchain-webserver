@@ -1,6 +1,6 @@
 import React, { SVGProps } from "react";
 
-export const EmphasisIcon = ({
+export const ClockIcon = ({
   className,
   height = 16,
   width = 16,
@@ -17,7 +17,7 @@ export const EmphasisIcon = ({
     >
       <path
         fillRule="evenodd"
-        d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"
+        d="M1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0zM8 0a8 8 0 100 16A8 8 0 008 0zm.5 4.75a.75.75 0 00-1.5 0v3.5a.75.75 0 00.471.696l2.5 1a.75.75 0 00.557-1.392L8.5 7.742V4.75z"
       ></path>
     </svg>
   );
