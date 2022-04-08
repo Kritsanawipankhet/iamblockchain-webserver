@@ -19,6 +19,7 @@
       "@/components/*": ["components/*"],
       "@/public/*": ["public/*"],
       "@/styles/*": ["styles/*"],
+      "@/libs/*": ["libs/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/icon/emphasis.tsx", "Backup/_error.tsx"],

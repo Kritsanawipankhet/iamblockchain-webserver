@@ -9,6 +9,7 @@ const nextConfig = {
     ETHEREUM_NETWORK: process.env.ETHEREUM_NETWORK,
     MNEMONIC_PHRASE: process.env.MNEMONIC_PHRASE,
     IAM_CONTRACT_ADDRESS: process.env.IAM_CONTRACT_ADDRESS,
+    TZ: process.env.TZ,
   },
   images: {
     domains: ["avatars.githubusercontent.com"],

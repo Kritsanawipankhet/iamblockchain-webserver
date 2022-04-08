@@ -1,6 +1,6 @@
 export type TAuthorize = {
   client_id: string | string[];
-  redirect_uri: string | string[];
+  redirect_uri?: string | string[];
   login?: string | string[];
   scope?: string | string[];
   state?: string | string[];

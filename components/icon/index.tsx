@@ -6,3 +6,5 @@ export { QuestionIcon } from "./question";
 export { CircleSlashIcon } from "./circle-slash";
 export { ClockIcon } from "./clock";
 export { OrganizationIcon } from "./organization";
+export { WalletIcon } from "./wallet";
+export { EthereumIcon } from "./ethereum";

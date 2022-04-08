@@ -28,7 +28,7 @@ const ethersConnectNetwork = (): TInitializeEthers => {
 
 const ethersGetClientById = async (_clientId?: string | string[]) => {
   const initEthers = ethersConnectNetwork();
-  let clientResponse: TClient;
+  let clientResponse;
 
   try {
     const getClient = await IAMContract.connect(
