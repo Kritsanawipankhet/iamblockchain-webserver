@@ -8,3 +8,6 @@ export { ClockIcon } from "./clock";
 export { OrganizationIcon } from "./organization";
 export { WalletIcon } from "./wallet";
 export { EthereumIcon } from "./ethereum";
+export { TaskIcon } from "./task";
+export { UserIcon } from "./user";
+export { LinkIcon } from "./link";

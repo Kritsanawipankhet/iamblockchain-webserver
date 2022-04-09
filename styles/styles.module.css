@@ -47,6 +47,9 @@
   background-color: #2da44e !important;
 }
 
+.colorBgSearchKeyword {
+  background-color: #fff8c5 !important;
+}
 .colorBgWhite {
   background-color: #ffffff !important;
 }
@@ -264,6 +267,11 @@
   fill: currentColor;
 }
 
+.OcticonNone {
+  display: inline-block;
+  overflow: visible !important;
+  fill: currentColor;
+}
 /*  */
 
 .clearfix::before {

@@ -1,11 +1,11 @@
 import React from "react";
 import Index from "./index.module.css";
+import Image from "next/image";
 import Styles from "@/styles/styles.module.css";
 import { EmphasisIcon, FacebookIcon, GithubIcon } from "@/components/icon/";
-
 type Props = {};
 
-export default function DashedConnection({}: Props) {
+export default function OAuthDashedConnection({}: Props) {
   return (
     <>
       <div
@@ -18,9 +18,9 @@ export default function DashedConnection({}: Props) {
           <div
             className={`${Index.CircleBadge} ${Index.CircleBadgeMedium} ${Styles.colorBgWhite} ${Styles.overflowHidden}`}
           >
-            <FacebookIcon
+            {/* <FacebookIcon
               className={`${Styles.Octicon} ${Styles.widthFull}  ${Styles.heightFull}`}
-            />
+            /> */}
           </div>
           <div
             className={`${Index.CircleEmphasis} ${Styles.positionRelative} ${Styles.colorBgPrimary} ${Styles.textCenter}`}
@@ -32,8 +32,15 @@ export default function DashedConnection({}: Props) {
           <div
             className={`${Index.CircleBadge} ${Index.CircleBadgeMedium} ${Styles.colorBgWhite} ${Styles.overflowHidden}`}
           >
-            <GithubIcon
+            {/* <GithubIcon
               className={`${Styles.Octicon} ${Styles.widthFull}  ${Styles.heightFull}`}
+            /> */}
+            <Image
+              src="/iam.png"
+              alt="IAM"
+              width={100}
+              height={100}
+              className={`${Index.Avatar} ${Index.AvatarUser} `}
             />
           </div>
         </div>
@@ -62,8 +69,15 @@ export default function DashedConnection({}: Props) {
           <div
             className={`${Index.CircleBadge} ${Index.CircleBadgeSmall} ${Styles.colorBgWhite} ${Styles.overflowHidden}`}
           >
-            <GithubIcon
+            {/* <GithubIcon
               className={`${Styles.Octicon} ${Styles.widthFull}  ${Styles.heightFull}`}
+            /> */}
+            <Image
+              src="/iam.png"
+              alt="IAM"
+              width={100}
+              height={100}
+              className={`${Index.Avatar} ${Index.AvatarUser} `}
             />
           </div>
         </div>

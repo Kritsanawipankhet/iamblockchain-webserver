@@ -3,6 +3,7 @@ require("dotenv").config();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  webpack5: true,
   reactStrictMode: true,
   env: {
     HOSTNAME: process.env.HOSTNAME,
