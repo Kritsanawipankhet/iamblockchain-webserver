@@ -1,28 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Styles from "@/styles/styles.module.css";
 import Index from "./index.module.css";
-import { shortAddressEth } from "@/libs/string";
-import { useAddress } from "@thirdweb-dev/react";
+import { shortAddressEth, toHex, truncateAddress } from "@/libs/string";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 import { UserIcon } from "@/components/icon/";
-
+import { useWeb3React } from "@web3-react/core";
+import { Tooltip } from "@chakra-ui/react";
+import { ethers } from "ethers";
 type Props = {
   clientName?: string;
   clientOwner?: string;
 };
 
 export default function OAuthUser({ clientName, clientOwner }: Props) {
-  const address = useAddress();
+  const { account, active } = useWeb3React();
 
   return (
     <div
       className={`${Styles.mb2} ${Styles.lhDefault} ${Styles.dFlex} ${Styles.flexContentCenter} ${Styles.flexItemsCenter} ${Styles.flexGap3}`}
     >
       <div className={`${Styles.mt1}`}>
-        {address ? (
-          <Jazzicon diameter={32} seed={jsNumberForAddress(address)} />
+        {active ? (
+          <Jazzicon diameter={32} seed={jsNumberForAddress(account || "")} />
         ) : (
           <UserIcon
             className={`${Styles.OcticonNone} ${Styles.colorFgMutes}`}
@@ -36,23 +37,43 @@ export default function OAuthUser({ clientName, clientOwner }: Props) {
         <strong>{clientName}</strong>
         {" by "}
         <strong>
-          <Link href={`https://rinkeby.etherscan.io/address/${address}`}>
-            <a target="_blank">
-              {clientOwner ? shortAddressEth(clientOwner) : ""}
-            </a>
+          <Link
+            href={`https://rinkeby.etherscan.io/address/${clientOwner}`}
+            passHref
+          >
+            <Tooltip
+              label={ethers.utils.getAddress(clientOwner || "")}
+              placement="right"
+            >
+              <a target="_blank">
+                {clientOwner
+                  ? truncateAddress(ethers.utils.getAddress(clientOwner))
+                  : ""}
+              </a>
+            </Tooltip>
           </Link>
         </strong>
         <small className={`${Styles.dBlock} ${Styles.colorFgMutes}`}>
-          {address
-            ? address
+          {active
+            ? active
               ? `Wants to access your wallet account address `
               : ""
             : `Please connect your wallet account.`}
-          {address ? (
-            <Link href={`https://rinkeby.etherscan.io/address/${address}`}>
-              <a target="_blank">
-                <strong>{shortAddressEth(address)}</strong>
-              </a>
+          {active ? (
+            <Link
+              href={`https://rinkeby.etherscan.io/address/${account}`}
+              passHref
+            >
+              <Tooltip
+                label={ethers.utils.getAddress(account || "")}
+                placement="right"
+              >
+                <a target="_blank">
+                  <strong>
+                    {truncateAddress(ethers.utils.getAddress(account || ""))}
+                  </strong>
+                </a>
+              </Tooltip>
             </Link>
           ) : (
             ""

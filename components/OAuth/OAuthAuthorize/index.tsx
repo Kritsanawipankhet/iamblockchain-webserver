@@ -1,139 +1,91 @@
-import React, { useEffect } from "react";
-import Styles from "@/styles/styles.module.css";
-import { ethers } from "ethers";
-import {
-  useChainId,
-  useNetwork,
-  useAddress,
-  useDisconnect,
-  useConnect,
-  useCoinbaseWallet,
-  useMetamask,
-  useWalletConnect,
-  useNetworkMismatch,
-} from "@thirdweb-dev/react";
-import detectEthereumProvider from "@metamask/detect-provider";
-import { WalletIcon } from "@/components/icon/";
+import React, { useEffect, useState } from "react";
+import { InjectedConnector } from "@web3-react/injected-connector";
+import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
+import { WalletLinkConnector } from "@web3-react/walletlink-connector";
 
-let disconnectWallet: any,
-  address: any,
-  network: any,
-  ethersConnect: any,
-  chainId: any;
+import Styles from "@/styles/styles.module.css";
+import { WalletIcon } from "@/components/icon/";
+import { useDisclosure } from "@chakra-ui/react";
+import { useWeb3React } from "@web3-react/core";
+import SelectWalletModal from "@/components/connectors/Modal";
+import { connectors } from "@/components/connectors";
+import { toHex, truncateAddress } from "@/libs/string";
+
 type Props = {};
+interface walletConnectType {
+  injected: InjectedConnector;
+  walletConnect: WalletConnectConnector;
+  // coinbaseWallet: WalletLinkConnector;
+}
+let provider: keyof walletConnectType;
 declare let window: any;
 export default function OAuthAuthorize({}: Props) {
-  disconnectWallet = useDisconnect();
-  address = useAddress();
-  network = useNetwork();
-  ethersConnect = useConnect();
-  chainId = useChainId();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { library, chainId, account, activate, deactivate, active, error } =
+    useWeb3React();
+  const [network, setNetwork] = useState(undefined);
 
-  const switchEthereumChain = useEffect(() => {
-    if (chainId !== 4 && ethersConnect[0].data.connected) {
-      (async () => {
-        if (typeof window !== "undefined") {
-          let ethereum = new ethers.providers.Web3Provider(window.ethereum);
-          try {
-            await ethereum.send("wallet_switchEthereumChain", [
-              { chainId: "0x4" },
-            ]);
-          } catch (switchError: any) {
-            // This error code indicates that the chain has not been added to MetaMask.
-            if (switchError.code === 4902) {
-              try {
-                await ethereum.send("wallet_addEthereumChain", [
-                  [
-                    {
-                      chainId: "0x4",
-                      chainName: "Rinkeby",
-                      rpcUrls: [
-                        "https://rinkeby.infura.io/v3/81a30e2706b04f5489a74021a6a5ff42",
-                      ] /* ... */,
-                    },
-                  ],
-                ]);
-              } catch (addError) {
-                disconnectWallet();
-                // handle "add" error
-              }
-            }
-            disconnectWallet();
-            // handle other "switch" errors
-          }
-        }
-      })();
-    }
-  }, [ethersConnect[0].data.connected]);
+  const refreshState = () => {
+    window.localStorage.setItem("provider", undefined);
+    setNetwork(undefined);
+  };
 
-  try {
-    if (typeof window !== "undefined") {
-      window.ethereum.on("chainChanged", (_chainId: string) => {
-        if (_chainId !== "0x4") {
-          disconnectWallet();
-        }
-      });
-    }
-  } catch (chainChangeError: any) {
-    console.log(chainChangeError);
-    if (chainChangeError.code === 4001) {
-      disconnectWallet();
-    }
-  }
+  const disconnect = () => {
+    refreshState();
+    deactivate();
+  };
 
-  let connectWithCoinbaseWallet = useCoinbaseWallet();
-  let connectWithMetamask = useMetamask();
-  let connectWithWalletConnect = useWalletConnect();
-
-  if (address) {
-    return (
-      <>
-        <form onSubmit={createAuthorize}>
-          <div
-            className={`${Styles.dFlex} ${Styles.flexJustifyCenter} ${Styles.flexGap2}`}
-          >
-            <button
-              type="button"
-              onClick={() => disconnectWallet()}
-              className={`${Styles.btn} ${Styles.btn} ${Styles.widthFull} ${Styles.wsNormal}`}
-            >
-              Disconnect Wallet
-            </button>
-            <button
-              type="button"
-              className={`${Styles.textCenter} ${Styles.btn} ${Styles.btn} ${Styles.btnPrimary} ${Styles.widthFull} ${Styles.wsNormal} ${Styles.textSmall}`}
-              onClick={(e) => createAuthorize(e)}
-            >
-              Authorize
-            </button>
-          </div>
-        </form>
-      </>
-    );
-  }
-
+  // useEffect(() => {
+  //   provider = window.localStorage.getItem("provider");
+  //   if (provider) {
+  //     activate(connectors[provider]);
+  //   }
+  // }, []);
   return (
     <>
       <div
         className={`${Styles.dFlex} ${Styles.flexJustifyCenter} ${Styles.flexGap2}`}
       >
-        <button
-          type="button"
-          className={`${Styles.btn} ${Styles.btn} ${Styles.widthFull} ${Styles.wsNormal}`}
-        >
-          Cancel
-        </button>
-        <button
-          type="button"
-          className={`${Styles.textCenter} ${Styles.btn} ${Styles.btn} ${Styles.btnPrimary} ${Styles.widthFull} ${Styles.wsNormal} ${Styles.textSmall}`}
-          onClick={() => connectWithCoinbaseWallet()}
-        >
-          <WalletIcon
-            className={`${Styles.colorFgOnEmphasis} ${Styles.Octicon}`}
-          />{" "}
-          Connect Wallet
-        </button>
+        {!active ? (
+          <button
+            onClick={() => {}}
+            type="button"
+            className={`${Styles.btn} ${Styles.btn} ${Styles.widthFull} ${Styles.wsNormal}`}
+          >
+            Cancel
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={disconnect}
+            className={`${Styles.btn} ${Styles.btn} ${Styles.widthFull} ${Styles.wsNormal}`}
+          >
+            Disconnect Wallet
+          </button>
+        )}
+
+        {!active ? (
+          <button
+            type="button"
+            className={`${Styles.textCenter} ${Styles.btn} ${Styles.btn} ${Styles.btnPrimary} ${Styles.widthFull} ${Styles.wsNormal} ${Styles.textSmall}`}
+            onClick={onOpen}
+          >
+            <WalletIcon
+              className={`${Styles.colorFgOnEmphasis} ${Styles.Octicon}`}
+            />{" "}
+            Connect Wallet
+          </button>
+        ) : (
+          <button
+            type="button"
+            className={`${Styles.textCenter} ${Styles.btn} ${Styles.btn} ${Styles.btnPrimary} ${Styles.widthFull} ${Styles.wsNormal} ${Styles.textSmall}`}
+            onClick={() => {}}
+          >
+            Authorize
+          </button>
+        )}
       </div>
+      <SelectWalletModal isOpen={isOpen} closeModal={onClose} />
     </>
   );
 }

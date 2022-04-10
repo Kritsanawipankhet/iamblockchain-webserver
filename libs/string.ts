@@ -15,3 +15,17 @@ export const shortAddressEth = (address?: string): string => {
 export const urlDomainFormat = (url: string): string => {
   return url.slice(0, url.lastIndexOf("/"));
 };
+
+export const truncateAddress = (address: string) => {
+  if (!address) return "";
+  const match = address.match(
+    /^(0x[a-zA-Z0-9]{3})[a-zA-Z0-9]+([a-zA-Z0-9]{4})$/
+  );
+  if (!match) return address;
+  return `${match[1]}…${match[2]}`;
+};
+
+export const toHex = (num: string) => {
+  const val = Number(num);
+  return "0x" + val.toString(16);
+};
