@@ -14,12 +14,19 @@ const ethersConnectNetwork = (): TInitializeEthers => {
   try {
     getWallet = ethers.Wallet.fromMnemonic(process.env.MNEMONIC_PHRASE);
     getProvider = ethers.getDefaultProvider(network);
+    // getProvider = ethers.getDefaultProvider("ropsten", {
+    //   infura: {
+    //     projectId: "81a30e2706b04f5489a74021a6a5ff42",
+    //     projectSecret: "33cc2553291b4176bd307e6f9eab3233",
+    //   },
+    // });
     provider = getWallet.connect(getProvider);
     IAMContract = new ethers.Contract(
       process.env.IAM_CONTRACT_ADDRESS,
       IAMContractAbi.abi,
       getProvider
     );
+    //console.log(provider);
   } catch (_e: any) {
     throw new Error(_e);
   }
@@ -38,6 +45,7 @@ const ethersGetClientById = async (_clientId?: string | string[]) => {
       Buffer.from(getClient, "base64").toString("ascii")
     );
   } catch (_e: any) {
+    //console.log(_e);
     return {
       error: _e.code,
       error_description: _e.reason,
