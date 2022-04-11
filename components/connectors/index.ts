@@ -14,17 +14,17 @@ const WalletConnect = new WalletConnectConnector({
   //   rpc: `https://mainnet.infura.io/v3/${process.env.INFURA_KEY}`,
   bridge: "https://bridge.walletconnect.org",
   qrcode: true,
-  supportedChainIds: [4],
+  supportedChainIds: [3],
   clientMeta: {
     name: "IAM Blockchain",
     description: "IAM Blockchain App",
     url: "https://iamblockchian.net",
-    icons: ["https://rinkeby.infura.io/v3/81a30e2706b04f5489a74021a6a5ff42"],
+    icons: ["https://ropsten.infura.io/v3/81a30e2706b04f5489a74021a6a5ff42"],
   },
 });
 
 const Injected = new InjectedConnector({
-  supportedChainIds: [4],
+  supportedChainIds: [3],
 });
 
 export const connectors = {

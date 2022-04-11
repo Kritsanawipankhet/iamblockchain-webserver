@@ -24,7 +24,7 @@ export default function OAuthChain({}: Props) {
             Supported Blockchain networks
           </strong>
           <small className={Index.accessDetails}>
-            ChainId 4 : Rinkeby Test Network.
+            ChainId 3 : Ropsten Test Network.
           </small>
         </div>
       </div>

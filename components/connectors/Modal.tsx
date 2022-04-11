@@ -50,7 +50,7 @@ export default function SelectWalletModal({ isOpen, closeModal }: Props) {
       });
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: "0x4" }],
+        params: [{ chainId: "0x3" }],
       });
 
       activate(connectors.injected);
@@ -61,10 +61,10 @@ export default function SelectWalletModal({ isOpen, closeModal }: Props) {
             method: "wallet_addEthereumChain",
             params: [
               {
-                chainId: "0x4",
-                chainName: "Rinkeby",
+                chainId: "0x3",
+                chainName: "Ropsten",
                 rpcUrls: [
-                  "https://rinkeby.infura.io/v3/81a30e2706b04f5489a74021a6a5ff42",
+                  "https://ropsten.infura.io/v3/81a30e2706b04f5489a74021a6a5ff42",
                 ],
               },
             ],
