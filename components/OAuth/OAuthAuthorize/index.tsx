@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
 import { WalletLinkConnector } from "@web3-react/walletlink-connector";
-
+import { useRouter, NextRouter } from "next/router";
 import Styles from "@/styles/styles.module.css";
 import { WalletIcon } from "@/components/icon/";
 import { useDisclosure } from "@chakra-ui/react";
@@ -10,14 +10,12 @@ import { useWeb3React } from "@web3-react/core";
 import SelectWalletModal from "@/components/connectors/Modal";
 import { connectors } from "@/components/connectors";
 import { toHex, truncateAddress } from "@/libs/string";
-
+import crypto from "crypto";
 import { ethers } from "ethers";
 import Abi from "@/ethereum/abi/IAM.json";
 import { waitForDebugger } from "inspector";
 
-type Props = {
-  _clientId: string;
-};
+type Props = {};
 
 interface walletConnectType {
   injected: InjectedConnector;
@@ -31,7 +29,10 @@ let activate: any;
 let active: boolean;
 let library: any;
 let account: string | undefined | null;
+let route: NextRouter;
+
 export default function OAuthAuthorize({}: Props) {
+  route = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { chainId, deactivate, error } = useWeb3React();
   library = useWeb3React().library;
@@ -110,6 +111,9 @@ export default function OAuthAuthorize({}: Props) {
 
 const createAuthorize = async (e: any) => {
   e.preventDefault();
+  const seed = crypto.randomBytes(256);
+  const code = crypto.createHash("sha1").update(seed).digest("hex");
+  const expires = 3600 * 24 * 30;
   if (active) {
     const IAMContract: ethers.Contract = new ethers.Contract(
       process.env.IAM_CONTRACT_ADDRESS,
@@ -119,15 +123,20 @@ const createAuthorize = async (e: any) => {
     const signer = library.getSigner();
     try {
       const authorizeTx = await IAMContract.connect(signer).createAuthorize(
-        "facebook",
-        "555",
-        ["555"],
-        "",
-        3600
+        route.query.client_id,
+        code,
+        [""],
+        route.query.redirect_uri || "",
+        expires
       );
-      console.log(authorizeTx);
+      console.log(
+        `Data Transfer : ${route.query.client_id} ,  ${code} , ${[
+          "",
+        ]} , ${expires}`
+      );
+      console.log("Tx : ", authorizeTx);
       const receipt = await authorizeTx.wait();
-      console.log(receipt);
+      console.log("Receipt : ", receipt);
     } catch (_e: any) {
       console.log(_e);
     }
