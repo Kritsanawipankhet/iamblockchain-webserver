@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
-import { WalletLinkConnector } from "@web3-react/walletlink-connector";
+// import { WalletLinkConnector } from "@web3-react/walletlink-connector";
 import {
   VStack,
   HStack,
@@ -26,16 +26,16 @@ type Props = {
 interface walletConnectType {
   injected: InjectedConnector;
   walletConnect: WalletConnectConnector;
-  coinbaseWallet: WalletLinkConnector;
+  // coinbaseWallet: WalletLinkConnector;
 }
 
 let provider: keyof walletConnectType;
 
 declare let window: any;
-
+let deactivate: () => void;
 export default function SelectWalletModal({ isOpen, closeModal }: Props) {
-  const { library, chainId, account, activate, deactivate, active, error } =
-    useWeb3React();
+  const { library, chainId, account, activate, active, error } = useWeb3React();
+  deactivate = useWeb3React().deactivate;
 
   const setProvider = (type: any) => {
     window.localStorage.setItem("provider", type);

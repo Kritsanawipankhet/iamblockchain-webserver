@@ -34,15 +34,14 @@
       ],
       "@/models/*": [
         "models/*"
-      ]
+      ],
+      "@/ethereum/*": ["ethereum/*"]
     }
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "components/icon/emphasis.tsx",
-    "Backup/_error.tsx"
   ],
   "exclude": [
     "node_modules"
