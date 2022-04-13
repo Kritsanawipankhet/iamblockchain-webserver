@@ -4,17 +4,22 @@
   min-height: 100vh;
 }
 
-.Header {
+.Navbar {
   width: 100%;
+  background-color: #fff;
+  position: fixed;
+  border-bottom: 1px solid #eaecef;
   z-index: 32;
+}
+
+.Header {
+  max-width: 1280px;
   display: flex;
   padding: 8px;
   font-size: 14px;
   color: #2c3e50;
-  background-color: #fff;
   align-items: center;
   flex-wrap: nowrap;
-  border-bottom: 1px solid #eaecef;
 }
 
 .HeaderItem {
@@ -50,24 +55,10 @@
   font-size: 18px;
 }
 
-.Sidebar {
-  padding-top: 40px;
-  font-size: 16px;
-  background-color: #fff;
-  width: 20rem;
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  margin: 0;
-  left: 0;
-  bottom: 0;
-  box-sizing: border-box;
-  border-right: 1px solid #eaecef;
-}
-
 .Container {
-  min-height: 40vh;
-  max-width: 1280px;
+  padding-top: 80px;
+  min-height: 200vh;
+  max-width: 980px;
   margin-left: auto;
   margin-right: auto;
 }

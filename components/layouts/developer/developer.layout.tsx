@@ -78,138 +78,141 @@ export default function DeveloperLayout({ children }: Props) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <div className={`${Index.body} ${Index.sidebarOpen}`}>
-        <div
-          className={`${Index.Header} ${Styles.px3} ${Styles.pxMd4} ${Styles.pxLg5} ${Styles.flexWrap} ${Styles.flexMdNowrap}`}
-          role="banner"
-        >
+        <div className={`${Index.Navbar}`}>
           <div
-            className={`${Styles.HeaderItem} ${Styles.dFlex} ${Styles.dMdNone}`}
+            className={`${Index.Header} ${Styles.mxAuto} ${Styles.px3} ${Styles.pxMd4} ${Styles.pxLg5} ${Styles.flexWrap} ${Styles.flexMdNowrap}`}
+            role="banner"
           >
-            <button>
-              <HambergurIcon
-                className={`${Styles.Octicon}`}
-                width={24}
-                height={24}
-              ></HambergurIcon>
-            </button>
-          </div>
-          <div
-            className={`${Index.HeaderItem} ${Styles.mtN1} ${Styles.mbN1} ${Styles.dMdFlex} ${Styles.dNone}`}
-          >
-            <Link href="/developer">
-              <a
-                className={`${Index.HeaderLink} ${Styles.dFlex} ${Styles.flexJustifyCenter} ${Styles.flexItemsCenter} ${Styles.flexGap3} ${Styles.mr2}`}
-              >
-                <Image src="/iam.svg" width="48" height="48" />
-                <span className={`${Index.BannerText} `}>
-                  IAMBLOCKCHAIN Developer
-                </span>
-              </a>
-            </Link>
-          </div>
-          <div
-            className={`${Index.HeaderItem} ${Styles.mtN1} ${Styles.mbN1} ${Styles.dMdFlex} ${Styles.dNone}  ${Styles.mx2}`}
-          >
-            <Link href="/developer/">
-              <a
-                className={`${Index.HeaderLink} ${
-                  route.pathname === "/developer" ? Index.active : ""
-                } `}
-              >
-                Home
-              </a>
-            </Link>
-          </div>
-          <div
-            className={`${Index.HeaderItem} ${Styles.mtN1} ${Styles.mbN1} ${Styles.dMdFlex} ${Styles.dNone}  ${Styles.mx2}`}
-          >
-            <Link href="/developer/oauth">
-              <a
-                className={`${Index.HeaderLink} ${
-                  route.pathname === "/developer/oauth" ||
-                  route.pathname === "/developer/oauth/create"
-                    ? Index.active
-                    : ""
-                }`}
-              >
-                OAuth App
-              </a>
-            </Link>
-          </div>
-          <div
-            className={`${Index.HeaderItem} ${Styles.mtN1} ${Styles.mbN1} ${Styles.dMdFlex} ${Styles.dNone}  ${Styles.mx2}`}
-          >
-            <a className={`${Index.HeaderLink}`}>Docs</a>
-          </div>
-          <div
-            className={`${Index.HeaderItem} ${Styles.mtN1} ${Styles.mbN1} ${Styles.dMdNone} ${Styles.dFlex}`}
-          ></div>
-          <div className={`${Index.HeaderItemFull}`}>
-            <Link href="#">
-              <a
-                className={`${Index.HeaderLink} ${Styles.dFlex} ${Styles.dMdNone} ${Styles.flexJustifyCenter} ${Styles.flexItemsCenter} ${Styles.flexGap3}`}
-              >
-                <Image src="/iam.svg" width="48" height="48" />
-              </a>
-            </Link>
-          </div>
-          <div
-            className={`${Index.HeaderItem} ${Styles.positionRelative} ${Styles.mr0} ${Styles.dMdFlex}`}
-          >
-            {!active ? (
-              <button
-                type="button"
-                className={`${Styles.textCenter} ${Styles.btn} ${Styles.btn} ${Styles.btnPrimary} ${Styles.widthFull} ${Styles.wsNormal} ${Styles.btnRounded}`}
-                style={Styles}
-                onClick={onOpen}
-              >
-                <WalletIcon
-                  className={`${Styles.colorFgOnEmphasis} ${Styles.Octicon}`}
-                />{" "}
-                Connect Wallet
+            <div
+              className={`${Styles.HeaderItem} ${Styles.dFlex} ${Styles.dMdNone}`}
+            >
+              <button>
+                <HambergurIcon
+                  className={`${Styles.Octicon}`}
+                  width={24}
+                  height={24}
+                ></HambergurIcon>
               </button>
-            ) : (
-              <Menu>
-                <MenuButton
-                  rounded={"full"}
-                  as={Button}
-                  rightIcon={<ChevronDownIcon />}
+            </div>
+            <div
+              className={`${Index.HeaderItem} ${Styles.mtN1} ${Styles.mbN1} ${Styles.dMdFlex} ${Styles.dNone}`}
+            >
+              <Link href="/developer">
+                <a
+                  className={`${Index.HeaderLink} ${Styles.dFlex} ${Styles.flexJustifyCenter} ${Styles.flexItemsCenter} ${Styles.flexGap3} ${Styles.mr2}`}
                 >
-                  <div
-                    className={`${Styles.dFlex} ${Styles.flexItemsCenter} ${Styles.flexJustifyCenter} ${Styles.flexGap2}`}
+                  <Image src="/iam.svg" width="48" height="48" />
+                  <span className={`${Index.BannerText} `}>
+                    IAMBLOCKCHAIN Developer
+                  </span>
+                </a>
+              </Link>
+            </div>
+            <div
+              className={`${Index.HeaderItem} ${Styles.mtN1} ${Styles.mbN1} ${Styles.dMdFlex} ${Styles.dNone}  ${Styles.mx2}`}
+            >
+              <Link href="/developer/">
+                <a
+                  className={`${Index.HeaderLink} ${
+                    route.pathname === "/developer" ? Index.active : ""
+                  } `}
+                >
+                  Home
+                </a>
+              </Link>
+            </div>
+            <div
+              className={`${Index.HeaderItem} ${Styles.mtN1} ${Styles.mbN1} ${Styles.dMdFlex} ${Styles.dNone}  ${Styles.mx2}`}
+            >
+              <Link href="/developer/oauth">
+                <a
+                  className={`${Index.HeaderLink} ${
+                    route.pathname === "/developer/oauth" ||
+                    route.pathname === "/developer/oauth/create"
+                      ? Index.active
+                      : ""
+                  }`}
+                >
+                  OAuth App
+                </a>
+              </Link>
+            </div>
+            <div
+              className={`${Index.HeaderItem} ${Styles.mtN1} ${Styles.mbN1} ${Styles.dMdFlex} ${Styles.dNone}  ${Styles.mx2}`}
+            >
+              <a className={`${Index.HeaderLink}`}>Docs</a>
+            </div>
+            <div
+              className={`${Index.HeaderItem} ${Styles.mtN1} ${Styles.mbN1} ${Styles.dMdNone} ${Styles.dFlex}`}
+            ></div>
+            <div className={`${Index.HeaderItemFull}`}>
+              <Link href="#">
+                <a
+                  className={`${Index.HeaderLink} ${Styles.dFlex} ${Styles.dMdNone} ${Styles.flexItemsCenter} ${Styles.flexGap3}`}
+                >
+                  <Image src="/iam.svg" width="48" height="48" />
+                </a>
+              </Link>
+            </div>
+            <div
+              className={`${Index.HeaderItem} ${Styles.positionRelative} ${Styles.mr0} ${Styles.dMdFlex}`}
+            >
+              {!active ? (
+                <button
+                  type="button"
+                  className={`${Styles.textCenter} ${Styles.btn} ${Styles.btn} ${Styles.btnPrimary} ${Styles.widthFull} ${Styles.wsNormal} ${Styles.btnRounded}`}
+                  style={Styles}
+                  onClick={onOpen}
+                >
+                  <WalletIcon
+                    className={`${Styles.colorFgOnEmphasis} ${Styles.Octicon}`}
+                  />{" "}
+                  Connect Wallet
+                </button>
+              ) : (
+                <Menu>
+                  <MenuButton
+                    rounded={"full"}
+                    as={Button}
+                    rightIcon={<ChevronDownIcon />}
                   >
-                    <WalletIcon
-                      className={`${Styles.colorFgMutes}`}
-                    ></WalletIcon>
-                    <span>
-                      {truncateAddress(ethers.utils.getAddress(account || ""))}
-                    </span>
-                  </div>
-                </MenuButton>
-                <MenuList>
-                  <MenuGroup title="Profile">
-                    <MenuItem>My Account</MenuItem>
-                  </MenuGroup>
-                  <MenuDivider />
-                  <MenuGroup title="Help">
-                    <MenuItem>Docs</MenuItem>
-                    <MenuItem>FAQ</MenuItem>
-                  </MenuGroup>
-                  <MenuDivider />
-                  <MenuItem onClick={disconnect}>
-                    <RightFromBracketIcon
-                      className={`${Styles.colorFgMutes} ${Styles.mr1}`}
-                    ></RightFromBracketIcon>{" "}
-                    Disconnect Wallet
-                  </MenuItem>
-                </MenuList>
-              </Menu>
-            )}
+                    <div
+                      className={`${Styles.dFlex} ${Styles.flexItemsCenter} ${Styles.flexJustifyCenter} ${Styles.flexGap2}`}
+                    >
+                      <WalletIcon
+                        className={`${Styles.colorFgMutes}`}
+                      ></WalletIcon>
+                      <span>
+                        {truncateAddress(
+                          ethers.utils.getAddress(account || "")
+                        )}
+                      </span>
+                    </div>
+                  </MenuButton>
+                  <MenuList>
+                    <MenuGroup title="Profile">
+                      <MenuItem>My Account</MenuItem>
+                    </MenuGroup>
+                    <MenuDivider />
+                    <MenuGroup title="Help">
+                      <MenuItem>Docs</MenuItem>
+                      <MenuItem>FAQ</MenuItem>
+                    </MenuGroup>
+                    <MenuDivider />
+                    <MenuItem onClick={disconnect}>
+                      <RightFromBracketIcon
+                        className={`${Styles.colorFgMutes} ${Styles.mr1}`}
+                      ></RightFromBracketIcon>{" "}
+                      Disconnect Wallet
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+              )}
+            </div>
           </div>
         </div>
-
         <div
-          className={`${Index.Container} ${Styles.pt5} ${Styles.pResponsive} ${Styles.clearfix}`}
+          className={`${Index.Container} ${Styles.pResponsive} ${Styles.clearfix}`}
         >
           {children}
         </div>

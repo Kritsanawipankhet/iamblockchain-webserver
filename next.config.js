@@ -3,6 +3,14 @@ require("dotenv").config();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async rewrites() {
+    return [
+      {
+        source: "/",
+        destination: "/developer",
+      },
+    ];
+  },
   webpack5: true,
   reactStrictMode: true,
   env: {
