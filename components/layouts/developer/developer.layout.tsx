@@ -55,8 +55,6 @@ export default function DeveloperLayout({ children }: Props) {
 
   useEffect(() => {
     const checkIfClickedOutside = (e: any) => {
-      // If the menu is open and the clicked target is not within the menu,
-      // then close the menu
       if (sidebarOpen && ref.current && !ref.current.contains(e.target)) {
         setSidebarOpen(false);
       }
@@ -65,7 +63,6 @@ export default function DeveloperLayout({ children }: Props) {
     document.addEventListener("mousedown", checkIfClickedOutside);
 
     return () => {
-      // Cleanup the event listener
       document.removeEventListener("mousedown", checkIfClickedOutside);
     };
   }, [sidebarOpen]);
@@ -237,7 +234,7 @@ export default function DeveloperLayout({ children }: Props) {
                     <MenuDivider />
                     <MenuItem onClick={disconnect}>
                       <RightFromBracketIcon
-                        className={`${Styles.colorFgMutes} ${Styles.mr1}`}
+                        className={`${Styles.Octicon} ${Styles.colorFgMutes} ${Styles.mr1}`}
                       ></RightFromBracketIcon>{" "}
                       Disconnect Wallet
                     </MenuItem>
@@ -253,7 +250,11 @@ export default function DeveloperLayout({ children }: Props) {
           >
             <ul>
               <Link href="/developer">
-                <a>
+                <a
+                  onClick={() => {
+                    setSidebarOpen(false);
+                  }}
+                >
                   <li
                     className={
                       route.pathname === "/developer" ? Index.active : ""
@@ -264,7 +265,11 @@ export default function DeveloperLayout({ children }: Props) {
                 </a>
               </Link>
               <Link href="/developer/oauth">
-                <a>
+                <a
+                  onClick={() => {
+                    setSidebarOpen(false);
+                  }}
+                >
                   <li
                     className={
                       route.pathname === "/developer/oauth" ||
@@ -278,7 +283,11 @@ export default function DeveloperLayout({ children }: Props) {
                 </a>
               </Link>
               <Link href="/developer/docs">
-                <a>
+                <a
+                  onClick={() => {
+                    setSidebarOpen(false);
+                  }}
+                >
                   <li
                     className={
                       route.pathname === "/developer/docs" ? Index.active : ""
