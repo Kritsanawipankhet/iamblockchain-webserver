@@ -32,7 +32,6 @@
 }
 
 .HeaderItemFull {
-  z-index: 3;
   flex: auto;
 }
 
@@ -61,4 +60,45 @@
   max-width: 980px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.Sidebar {
+  transition: 0.8s ease;
+  border-top: 1px solid #eaecef;
+  border-bottom: 1px solid #eaecef;
+
+  border-right: 1px solid #eaecef;
+  position: fixed;
+  height: 100%;
+  width: 220px;
+  left: -100%;
+  background-color: #fff;
+}
+
+.Sidebar ul {
+  list-style-type: none;
+  text-decoration: none;
+}
+
+.Sidebar li {
+  font-size: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 24px;
+  padding-left: 24px;
+  border-bottom: 1px solid #eaecef;
+}
+
+.Sidebar li.active {
+  font-weight: 700;
+  color: #007bff;
+}
+
+.Sidebar a:hover {
+  text-decoration: none;
+}
+
+.Sidebar.active {
+  left: 0;
+  transition: 0.5s;
 }

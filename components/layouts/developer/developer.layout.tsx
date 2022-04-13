@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { walletConnectType } from "@/models/.";
 import { ethers } from "ethers";
 import Index from "./developer.layout.module.css";
@@ -28,8 +28,7 @@ import { useWeb3React } from "@web3-react/core";
 import { connectors } from "@/components/connectors";
 import { useRouter, type NextRouter } from "next/router";
 import SelectWalletModal from "@/components/connectors/Modal";
-import { toHex, truncateAddress } from "@/libs/string";
-import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
+import { truncateAddress } from "@/libs/string";
 
 type Props = {
   children?: React.ReactNode;
@@ -41,14 +40,35 @@ let route: NextRouter;
 let provider: keyof walletConnectType;
 let activate: any;
 let deactivate: any;
-
+let ref: any;
 export default function DeveloperLayout({ children }: Props) {
   route = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { active, account } = useWeb3React();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const [network, setNetwork] = useState(undefined);
   deactivate = useWeb3React().deactivate;
   activate = useWeb3React().activate;
+
+  ref = useRef();
+
+  useEffect(() => {
+    const checkIfClickedOutside = (e: any) => {
+      // If the menu is open and the clicked target is not within the menu,
+      // then close the menu
+      if (sidebarOpen && ref.current && !ref.current.contains(e.target)) {
+        setSidebarOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", checkIfClickedOutside);
+
+    return () => {
+      // Cleanup the event listener
+      document.removeEventListener("mousedown", checkIfClickedOutside);
+    };
+  }, [sidebarOpen]);
 
   const refreshState = () => {
     window.localStorage.setItem("provider", undefined);
@@ -60,21 +80,23 @@ export default function DeveloperLayout({ children }: Props) {
     deactivate();
   };
 
+  const sidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
   useEffect(() => {
     provider = window.localStorage.getItem("provider");
     if (provider) {
       activate(connectors[provider]);
     }
   }, []);
-
   return (
     <>
       <Head>
         <title>Developer application - IAMBLOCKCHAIN</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div className={`${Index.body} ${Index.sidebarOpen}`}>
-        <div className={`${Index.Navbar}`}>
+      <div className={`${Index.body} `}>
+        <div className={`${Index.Navbar}`} ref={ref}>
           <div
             className={`${Index.Header} ${Styles.mxAuto} ${Styles.px3} ${Styles.pxMd4} ${Styles.pxLg5} ${Styles.flexWrap} ${Styles.flexMdNowrap}`}
             role="banner"
@@ -82,7 +104,7 @@ export default function DeveloperLayout({ children }: Props) {
             <div
               className={`${Styles.HeaderItem} ${Styles.dFlex} ${Styles.dMdNone}`}
             >
-              <button>
+              <button onClick={sidebar}>
                 <HambergurIcon
                   className={`${Styles.Octicon}`}
                   width={24}
@@ -141,24 +163,32 @@ export default function DeveloperLayout({ children }: Props) {
             <div
               className={`${Index.HeaderItem} ${Styles.mtN1} ${Styles.mbN1} ${Styles.dMdFlex} ${Styles.dNone}  ${Styles.mx2}`}
             >
-              <a className={`${Index.HeaderLink}`}>Docs</a>
+              <Link href="/developer/docs">
+                <a
+                  className={`${Index.HeaderLink} ${
+                    route.pathname === "/developer/docs" ? Index.active : ""
+                  }`}
+                >
+                  Docs
+                </a>
+              </Link>
             </div>
             <div
               className={`${Index.HeaderItem} ${Styles.mtN1} ${Styles.mbN1} ${Styles.dMdNone} ${Styles.dFlex}`}
             ></div>
             <div className={`${Index.HeaderItemFull}`}>
-              <Link href="#">
-                <a
-                  className={`${Index.HeaderLink} ${Styles.dFlex} ${Styles.dMdNone} ${Styles.flexItemsCenter} ${Styles.flexGap3}`}
-                >
-                  <Image
-                    src="/iam.svg"
-                    width="48"
-                    height="48"
-                    alt="IAMBlockchain"
-                  />
-                </a>
-              </Link>
+              <div className={`${Styles.dBlock} ${Styles.dMdNone} `}>
+                <Link href="/developer">
+                  <a className={`${Index.HeaderLink} `}>
+                    <Image
+                      src="/iam.svg"
+                      width="48"
+                      height="48"
+                      alt="IAMBlockchain"
+                    />
+                  </a>
+                </Link>
+              </div>
             </div>
             <div
               className={`${Index.HeaderItem} ${Styles.positionRelative} ${Styles.mr0} ${Styles.dMdFlex}`}
@@ -216,7 +246,52 @@ export default function DeveloperLayout({ children }: Props) {
               )}
             </div>
           </div>
+          <div
+            className={`${Index.Sidebar} ${sidebarOpen ? Index.active : ""} ${
+              Styles.dBlock
+            } ${Styles.dMdNone}`}
+          >
+            <ul>
+              <Link href="/developer">
+                <a>
+                  <li
+                    className={
+                      route.pathname === "/developer" ? Index.active : ""
+                    }
+                  >
+                    Home
+                  </li>
+                </a>
+              </Link>
+              <Link href="/developer/oauth">
+                <a>
+                  <li
+                    className={
+                      route.pathname === "/developer/oauth" ||
+                      route.pathname === "/developer/oauth/create"
+                        ? Index.active
+                        : ""
+                    }
+                  >
+                    OAuth App
+                  </li>
+                </a>
+              </Link>
+              <Link href="/developer/docs">
+                <a>
+                  <li
+                    className={
+                      route.pathname === "/developer/docs" ? Index.active : ""
+                    }
+                  >
+                    Docs
+                  </li>
+                </a>
+              </Link>
+            </ul>
+          </div>
         </div>
+
         <div
           className={`${Index.Container} ${Styles.pResponsive} ${Styles.clearfix}`}
         >

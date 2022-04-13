@@ -20,6 +20,7 @@ type Props = {};
 
 export default function OAuthCreate({}: Props) {
   const { active, account } = useWeb3React();
+
   return (
     <DeveloperLayout>
       {active ? (
@@ -38,14 +39,22 @@ export default function OAuthCreate({}: Props) {
                 <FormLabel htmlFor="application-name">
                   Application name
                 </FormLabel>
-                <Input id="application-name" placeholder="Application name" />
+                <Input
+                  id="application-name"
+                  placeholder="Application name"
+                  autoComplete="off"
+                />
                 <FormHelperText>
                   Something users will recognize and trust.
                 </FormHelperText>
               </FormControl>
               <FormControl mb={3} isRequired>
                 <FormLabel htmlFor="homepage-url">Homepage URL</FormLabel>
-                <Input id="homepage-url" placeholder="Homepage URL" />
+                <Input
+                  id="homepage-url"
+                  placeholder="Homepage URL"
+                  autoComplete="off"
+                />
                 <FormHelperText>
                   The full URL to your application homepage.
                 </FormHelperText>
@@ -69,6 +78,7 @@ export default function OAuthCreate({}: Props) {
                 <Input
                   id="authorization-callback-url"
                   placeholder="Authorization callback URL"
+                  autoComplete="off"
                 />
                 <FormHelperText>
                   Your application’s callback URL. Read our OAuth documentation
