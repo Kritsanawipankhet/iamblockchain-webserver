@@ -20,7 +20,16 @@ type Props = {};
 
 export default function OAuthCreate({}: Props) {
   const { active, account } = useWeb3React();
+  const [application, setApplication] = useState("");
+  const [homeUrl, setHomeUrl] = useState("");
+  const [applicationDescription, setApplicationDescription] = useState("");
+  const [authorizationCallback, setAuthorizationCallback] = useState("");
 
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    alert("Comming Soon");
+    console.log(event);
+  };
   if (active) {
     return (
       <DeveloperLayout>
@@ -34,8 +43,8 @@ export default function OAuthCreate({}: Props) {
           </div>
           <div className={Index.divider}></div>
           <div>
-            <form>
-              <FormControl mt={6} mb={3} isRequired>
+            <form onSubmit={handleSubmit}>
+              <FormControl mt={6} mb={3} isRequired={true} isInvalid={false}>
                 <FormLabel htmlFor="application-name">
                   Application name
                 </FormLabel>
@@ -43,6 +52,9 @@ export default function OAuthCreate({}: Props) {
                   id="application-name"
                   placeholder="Application name"
                   autoComplete="off"
+                  onChange={(event) =>
+                    setApplication(event.currentTarget.value)
+                  }
                 />
                 <FormHelperText>
                   Something users will recognize and trust.
@@ -54,6 +66,7 @@ export default function OAuthCreate({}: Props) {
                   id="homepage-url"
                   placeholder="Homepage URL"
                   autoComplete="off"
+                  onChange={(event) => setHomeUrl(event.currentTarget.value)}
                 />
                 <FormHelperText>
                   The full URL to your application homepage.
@@ -66,6 +79,9 @@ export default function OAuthCreate({}: Props) {
                 <Textarea
                   id="application-description"
                   placeholder="Application description is optional"
+                  onChange={(event) =>
+                    setApplicationDescription(event.currentTarget.value)
+                  }
                 />
                 <FormHelperText>
                   This is displayed to all users of your application.
@@ -79,6 +95,9 @@ export default function OAuthCreate({}: Props) {
                   id="authorization-callback-url"
                   placeholder="Authorization callback URL"
                   autoComplete="off"
+                  onChange={(event) =>
+                    setAuthorizationCallback(event.currentTarget.value)
+                  }
                 />
                 <FormHelperText>
                   Your application’s callback URL. Read our OAuth documentation
@@ -86,7 +105,9 @@ export default function OAuthCreate({}: Props) {
                 </FormHelperText>
               </FormControl>
               <ButtonGroup spacing="4">
-                <Button colorScheme="blue">Register Application</Button>
+                <Button colorScheme="blue" type="submit">
+                  Register Application
+                </Button>
                 <Link href="/developer/oauth" passHref>
                   <Button>Cancel</Button>
                 </Link>
@@ -103,8 +124,3 @@ export default function OAuthCreate({}: Props) {
     </DeveloperLayout>
   );
 }
-
-const createClient = async (_e: any) => {
-  _e.preventDefault;
-  console.log(_e);
-};

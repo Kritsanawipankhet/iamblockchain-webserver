@@ -309,7 +309,7 @@ export default function DeveloperLayout({ children }: Props) {
         <div className={`${Index.Footer} ${Styles.clearfix}`}>
           <div className={`${Index.Space}`}></div>
           <div className={`${Index.FooterContent} ${Styles.pResponsive}`}>
-            © 2022 IAMBlockchain.
+            © 2022 IAMBlockchain, KMITL.
           </div>
         </div>
 
