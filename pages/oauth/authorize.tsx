@@ -6,7 +6,7 @@ import { ethersGetClientById } from "../../ethereum";
 import { TClient, TAuthorize } from "../../models";
 import { AuthLayout } from "@/components/layouts/auth";
 import Styles from "@/styles/styles.module.css";
-import Index from "@/styles/auth.module.css";
+import Index from "@/styles/oauth.module.css";
 import {
   OAuthAuthorize,
   OAuthChain,
@@ -18,6 +18,7 @@ import {
 } from "@/components/OAuth";
 import Link from "next/link";
 import { permissionType } from "@/models/.";
+import LoadingOverlay from "@/components/LoadingOverlay";
 
 type Props = {
   client: TClient;
@@ -25,14 +26,16 @@ type Props = {
 };
 
 export default function Authorize({ client, params }: Props) {
+  const [loading, setLoading] = useState(false);
   if (client.error) {
     return <Error statusCode={client.error_code || 400} />;
   }
 
   return (
     <AuthLayout>
+      <LoadingOverlay Loading={loading}></LoadingOverlay>
       <div className={Styles.mxAuto} style={{ maxWidth: "530px" }}>
-        <div className={`${Styles.px3} ${Styles.pt4}`}>
+        <div className={`${Styles.px3} ${Styles.pt6}`}>
           <OAuthDashedConnection />
           <h2
             className={`${Styles.m0} ${Styles.f2} ${Styles.textNormal} ${Styles.textCenter} ${Styles.lhCondensed}  ${Styles.mb4}`}
@@ -48,8 +51,8 @@ export default function Authorize({ client, params }: Props) {
                 clientOwner={client.client_owner}
               ></OAuthUser>
               <OAuthChain></OAuthChain>
-              <OAuthPermission></OAuthPermission>
-              <OAuthPermission type={permissionType.Task}></OAuthPermission>
+              {/* <OAuthPermission></OAuthPermission>
+              <OAuthPermission type={permissionType.Task}></OAuthPermission> */}
             </div>
             <div
               className={`${Index.BoxFooter} ${Styles.p3} ${Styles.pMd4} ${Styles.clearfix}`}

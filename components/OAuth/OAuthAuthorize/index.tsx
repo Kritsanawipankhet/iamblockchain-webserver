@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { InjectedConnector } from "@web3-react/injected-connector";
-import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
-import { WalletLinkConnector } from "@web3-react/walletlink-connector";
+import { walletConnectType } from "@/models/.";
 import { useRouter, NextRouter } from "next/router";
 import Styles from "@/styles/styles.module.css";
 import { WalletIcon } from "@/components/icon/";
@@ -13,15 +11,8 @@ import { toHex, truncateAddress } from "@/libs/string";
 import crypto from "crypto";
 import { ethers } from "ethers";
 import Abi from "@/ethereum/abi/IAM.json";
-import { waitForDebugger } from "inspector";
-
+import Index from "./index.module.css";
 type Props = {};
-
-interface walletConnectType {
-  injected: InjectedConnector;
-  walletConnect: WalletConnectConnector;
-  // coinbaseWallet: WalletLinkConnector;
-}
 
 let provider: keyof walletConnectType;
 declare let window: any;
@@ -67,13 +58,13 @@ export default function OAuthAuthorize({}: Props) {
             <button
               type="button"
               onClick={disconnect}
-              className={`${Styles.btn} ${Styles.btn} ${Styles.widthFull} ${Styles.wsNormal}`}
+              className={`${Styles.btn} ${Styles.btn} ${Styles.widthFull} ${Styles.wsNormal} ${Index.btnAuthorize}`}
             >
               Disconnect Wallet
             </button>
             <button
               type="submit"
-              className={`${Styles.textCenter} ${Styles.btn} ${Styles.btn} ${Styles.btnPrimary} ${Styles.widthFull} ${Styles.wsNormal} ${Styles.textSmall}`}
+              className={`${Styles.textCenter} ${Styles.btn} ${Styles.btn} ${Styles.btnPrimary} ${Styles.widthFull} ${Styles.wsNormal} ${Styles.textSmall} ${Index.btnAuthorize}`}
             >
               Authorize
             </button>
@@ -89,13 +80,13 @@ export default function OAuthAuthorize({}: Props) {
         <button
           onClick={() => {}}
           type="button"
-          className={`${Styles.btn} ${Styles.btn} ${Styles.widthFull} ${Styles.wsNormal}`}
+          className={`${Styles.btn} ${Styles.btn} ${Styles.widthFull} ${Styles.wsNormal} ${Index.btnAuthorize}`}
         >
           Cancel
         </button>
         <button
           type="button"
-          className={`${Styles.textCenter} ${Styles.btn} ${Styles.btn} ${Styles.btnPrimary} ${Styles.widthFull} ${Styles.wsNormal} ${Styles.textSmall}`}
+          className={`${Styles.textCenter} ${Styles.btn} ${Styles.btn} ${Styles.btnPrimary} ${Styles.widthFull} ${Styles.wsNormal} ${Styles.textSmall} ${Index.btnAuthorize}`}
           onClick={onOpen}
         >
           <WalletIcon

@@ -11,3 +11,7 @@ export { EthereumIcon } from "./ethereum";
 export { TaskIcon } from "./task";
 export { UserIcon } from "./user";
 export { LinkIcon } from "./link";
+export { RightFromBracketIcon } from "./right-from-bracket";
+export { HambergurIcon } from "./hambergur";
+export { LayerIcon } from "./layer";
+export { LockIcon } from "./lock";

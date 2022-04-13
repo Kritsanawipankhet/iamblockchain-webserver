@@ -1,0 +1,24 @@
+.TitlePage {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.TitlePageMedium {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.divider {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid hsla(210, 18%, 87%, 1);
+}
+
+.btnCreateOAuth {
+  border-radius: 999px;
+}
+
+.permissionText {
+  font-size: 16px;
+  font-weight: 400;
+}

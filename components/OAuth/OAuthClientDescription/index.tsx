@@ -1,6 +1,6 @@
 import React from "react";
 import Styles from "@/styles/styles.module.css";
-import Index from "@/styles/auth.module.css";
+import Index from "./index.module.css";
 import {
   CircleSlashIcon,
   ClockIcon,

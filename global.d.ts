@@ -4,5 +4,6 @@ namespace NodeJS {
     ETHEREUM_NETWORK: string;
     MNEMONIC_PHRASE: string;
     IAM_CONTRACT_ADDRESS: string;
+    TZ: string;
   }
 }

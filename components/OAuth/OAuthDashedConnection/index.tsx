@@ -62,8 +62,12 @@ export default function OAuthDashedConnection({}: Props) {
           <div
             className={`${Index.CircleBadge} ${Index.CircleBadgeSmall} ${Styles.colorBgWhite} ${Styles.overflowHidden}`}
           >
-            <FacebookIcon
-              className={`${Styles.Octicon} ${Styles.widthFull}  ${Styles.heightFull}`}
+            <Image
+              src="/eth-icon.png"
+              alt="Eth"
+              width={100}
+              height={100}
+              className={`${Index.Avatar} ${Index.AvatarUser} `}
             />
           </div>
           <div

@@ -67,6 +67,14 @@
   margin-right: auto !important;
   margin-left: auto !important;
 }
+.mx3 {
+  margin-right: 16px !important;
+  margin-left: 16px !important;
+}
+.myAuto {
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+}
 
 .my3 {
   margin-top: 16px !important;
@@ -76,6 +84,14 @@
 .m0 {
   margin: 0 !important;
 }
+
+.mbN1 {
+  margin-bottom: -4px !important;
+}
+.mtN1 {
+  margin-top: -4 !important;
+}
+
 .mb0 {
   margin-bottom: 0 !important;
 }
@@ -105,6 +121,10 @@
   margin-top: 32px !important;
 }
 
+.mr0 {
+  margin-right: 0px !important;
+}
+
 .mr1 {
   margin-right: 4px !important;
 }
@@ -129,6 +149,13 @@
   padding-top: 24px !important;
 }
 
+.pt5 {
+  padding-top: 36px !important;
+}
+
+.pt6 {
+  padding-top: 48px !important;
+}
 .px0 {
   padding-right: 0px !important;
   padding-left: 0px !important;
@@ -199,6 +226,18 @@
   gap: 18px !important;
 }
 
+.flexWrap {
+  flex-wrap: wrap !important;
+}
+
+.flexColumn {
+  flex-direction: column !important;
+}
+
+.flexOrder2 {
+  order: 2 !important;
+}
+
 .dNone {
   display: none !important;
 }
@@ -257,8 +296,41 @@
   .pMd4 {
     padding: 24px !important;
   }
-}
 
+  .pxMd4 {
+    padding-right: 24px !important;
+    padding-left: 24px !important;
+  }
+  .flexMdNowrap {
+    flex-wrap: nowrap !important;
+  }
+
+  .dMdFlex {
+    display: flex !important;
+  }
+
+  .mrMd3 {
+    margin-right: 16px !important;
+  }
+
+  .mtMd0 {
+    margin-top: 0px !important;
+  }
+
+  .flexMdOrderNone {
+    order: inherit !important;
+  }
+
+  .flexMdRow {
+    flex-direction: row !important;
+  }
+}
+@media (min-width: 1012px) {
+  .pxLg5 {
+    padding-right: 32px !important;
+    padding-left: 32px !important;
+  }
+}
 /*  SVG */
 .Octicon {
   display: inline-block;
@@ -286,6 +358,9 @@
 }
 
 /* Button */
+.btnRounded {
+  border-radius: 9999px;
+}
 
 .btn {
   position: relative;
@@ -299,7 +374,6 @@
   cursor: pointer;
   -webkit-user-select: none;
   user-select: none;
-  border-radius: 6px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -338,4 +412,30 @@
 
 .mr2Btn {
   margin-right: 8px !important;
+}
+
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+  cursor: pointer;
+}
+
+.overlay div {
+  position: fixed;
+  width: 200px;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -100px;
+}
+
+.pResponsive {
+  padding-right: 32px !important;
+  padding-left: 32px !important;
 }

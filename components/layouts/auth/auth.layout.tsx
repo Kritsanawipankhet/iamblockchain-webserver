@@ -2,7 +2,7 @@ import React from "react";
 import Styles from "./auth.layout.module.css";
 import Head from "next/head";
 type Props = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 export default function AuthLayout({ children }: Props) {
