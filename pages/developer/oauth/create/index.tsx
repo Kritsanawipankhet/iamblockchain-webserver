@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { DeveloperLayout } from "@/components/layouts/developer";
 import { useWeb3React } from "@web3-react/core";
-import { LockIcon } from "@/components/icon";
 import Index from "@/styles/dev.oauth.module.css";
 import Styles from "@/styles/styles.module.css";
 import {
@@ -15,15 +14,16 @@ import {
   ButtonGroup,
 } from "@chakra-ui/react";
 import Link from "next/link";
+import PermissionDenied from "@/components/Developer/PermissionDenied";
 
 type Props = {};
 
 export default function OAuthCreate({}: Props) {
   const { active, account } = useWeb3React();
 
-  return (
-    <DeveloperLayout>
-      {active ? (
+  if (active) {
+    return (
+      <DeveloperLayout>
         <div>
           <div
             className={`${Styles.dFlex} ${Styles.flexItemsCenter} ${Styles.flexJustifyBetween}`}
@@ -94,21 +94,12 @@ export default function OAuthCreate({}: Props) {
             </form>
           </div>
         </div>
-      ) : (
-        <div
-          className={`${Styles.dFlex} ${Styles.flexColumn} ${Styles.flexItemsCenter} ${Styles.flexJustifyCenter} ${Styles.mxAuto} ${Styles.mt5} ${Styles.textCenter}`}
-        >
-          <LockIcon
-            className={`${Styles.Octicon} ${Styles.colorFgMutes} ${Styles.mb2}`}
-            width={32}
-            height={32}
-          />
-          <div className={`${Index.permissionText}`}>
-            You do not have permission to access OAuth Apps. <br></br>Please
-            connect your wallet account.
-          </div>
-        </div>
-      )}
+      </DeveloperLayout>
+    );
+  }
+  return (
+    <DeveloperLayout>
+      <PermissionDenied></PermissionDenied>
     </DeveloperLayout>
   );
 }

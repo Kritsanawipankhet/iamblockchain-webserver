@@ -305,6 +305,9 @@ export default function DeveloperLayout({ children }: Props) {
           className={`${Index.Container} ${Styles.pResponsive} ${Styles.clearfix}`}
         >
           {children}
+          <div className={`${Index.Footer} ${Styles.mxAuto}`}>
+            © 2022 IAMBlockchain.
+          </div>
         </div>
 
         <SelectWalletModal isOpen={isOpen} closeModal={onClose} />

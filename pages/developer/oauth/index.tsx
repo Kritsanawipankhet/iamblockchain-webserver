@@ -5,7 +5,7 @@ import Styles from "@/styles/styles.module.css";
 import { LayerIcon, LockIcon } from "@/components/icon";
 import { useWeb3React } from "@web3-react/core";
 import Link from "next/link";
-
+import PermissionDenied from "@/components/Developer/PermissionDenied";
 type Props = {};
 
 export default function Developer({}: Props) {
@@ -57,20 +57,7 @@ export default function Developer({}: Props) {
   }
   return (
     <DeveloperLayout>
-      <div
-        className={`${Styles.dFlex} ${Styles.flexColumn} ${Styles.flexItemsCenter} ${Styles.flexJustifyCenter} ${Styles.mxAuto} ${Styles.mt5} ${Styles.textCenter}`}
-      >
-        <LockIcon
-          className={`${Styles.Octicon} ${Styles.colorFgMutes} ${Styles.mb2}`}
-          width={32}
-          height={32}
-        />
-        <div className={`${Index.permissionText}`}>
-          You do not have permission to access OAuth Apps. <br></br>Please
-          connect your wallet account.
-        </div>
-      </div>
-      )
+      <PermissionDenied></PermissionDenied>
     </DeveloperLayout>
   );
 }
