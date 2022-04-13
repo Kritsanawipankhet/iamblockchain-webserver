@@ -305,7 +305,10 @@ export default function DeveloperLayout({ children }: Props) {
           className={`${Index.Container} ${Styles.pResponsive} ${Styles.clearfix}`}
         >
           {children}
-          <div className={`${Index.Footer} ${Styles.mxAuto}`}>
+        </div>
+        <div className={`${Index.Footer} ${Styles.clearfix}`}>
+          <div className={`${Index.Space}`}></div>
+          <div className={`${Index.FooterContent} ${Styles.pResponsive}`}>
             © 2022 IAMBlockchain.
           </div>
         </div>

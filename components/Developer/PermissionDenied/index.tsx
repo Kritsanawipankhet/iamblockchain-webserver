@@ -8,7 +8,7 @@ type Props = {};
 export default function PermissionDenied({}: Props) {
   return (
     <div
-      className={`${Styles.dFlex} ${Styles.flexColumn} ${Styles.flexItemsCenter} ${Styles.flexJustifyCenter} ${Styles.mxAuto} ${Styles.mt5} ${Styles.textCenter}`}
+      className={`${Styles.dFlex} ${Styles.flexColumn} ${Styles.flexItemsCenter} ${Styles.flexJustifyCenter} ${Styles.mxAuto} ${Styles.mt6} ${Styles.textCenter}`}
     >
       <LockIcon
         className={`${Styles.Octicon} ${Styles.colorFgMutes} ${Styles.mb2}`}

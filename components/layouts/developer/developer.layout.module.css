@@ -56,7 +56,8 @@
 
 .Container {
   padding-top: 80px;
-  min-height: 40vh;
+  padding-bottom: 80px;
+  min-height: 90vh;
   max-width: 980px;
   margin-left: auto;
   margin-right: auto;
@@ -104,8 +105,26 @@
 }
 
 .Footer {
-  margin-top: 64px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+
+.Space {
+  height: 15px;
+  background-color: #fff;
+  z-index: 35;
+}
+
+.FooterContent {
+  z-index: 35;
+  background-color: #fff;
   border-top: 1px solid #eaecef;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 980px;
   text-align: right;
-  padding-top: 8px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  cursor: pointer;
 }
