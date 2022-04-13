@@ -9,11 +9,11 @@ import Link from "next/link";
 type Props = {};
 
 export default function Developer({}: Props) {
-  const { active, chainId, deactivate, error } = useWeb3React();
+  const { active, account } = useWeb3React();
 
-  return (
-    <DeveloperLayout>
-      {active ? (
+  if (active) {
+    return (
+      <DeveloperLayout>
         <div>
           <div
             className={`${Styles.dFlex} ${Styles.flexItemsCenter} ${Styles.flexJustifyBetween}`}
@@ -55,21 +55,25 @@ export default function Developer({}: Props) {
           facilis eos praesentium accusamus, veniam fuga unde provident non
           tenetur.
         </div>
-      ) : (
-        <div
-          className={`${Styles.dFlex} ${Styles.flexColumn} ${Styles.flexItemsCenter} ${Styles.flexJustifyCenter} ${Styles.mxAuto} ${Styles.mt5} ${Styles.textCenter}`}
-        >
-          <LockIcon
-            className={`${Styles.Octicon} ${Styles.colorFgMutes} ${Styles.mb2}`}
-            width={32}
-            height={32}
-          />
-          <div className={`${Index.permissionText}`}>
-            You do not have permission to access OAuth Apps. <br></br>Please
-            connect your wallet account.
-          </div>
+      </DeveloperLayout>
+    );
+  }
+  return (
+    <DeveloperLayout>
+      <div
+        className={`${Styles.dFlex} ${Styles.flexColumn} ${Styles.flexItemsCenter} ${Styles.flexJustifyCenter} ${Styles.mxAuto} ${Styles.mt5} ${Styles.textCenter}`}
+      >
+        <LockIcon
+          className={`${Styles.Octicon} ${Styles.colorFgMutes} ${Styles.mb2}`}
+          width={32}
+          height={32}
+        />
+        <div className={`${Index.permissionText}`}>
+          You do not have permission to access OAuth Apps. <br></br>Please
+          connect your wallet account.
         </div>
-      )}
+      </div>
+      )
     </DeveloperLayout>
   );
 }

@@ -7,7 +7,6 @@ import { useDisclosure } from "@chakra-ui/react";
 import { useWeb3React } from "@web3-react/core";
 import SelectWalletModal from "@/components/connectors/Modal";
 import { connectors } from "@/components/connectors";
-import { toHex, truncateAddress } from "@/libs/string";
 import crypto from "crypto";
 import { ethers } from "ethers";
 import Abi from "@/ethereum/abi/IAM.json";

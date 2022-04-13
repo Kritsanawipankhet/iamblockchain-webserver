@@ -3,11 +3,12 @@ require("dotenv").config();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  async rewrites() {
+  async redirects() {
     return [
       {
         source: "/",
         destination: "/developer",
+        permanent: true,
       },
     ];
   },

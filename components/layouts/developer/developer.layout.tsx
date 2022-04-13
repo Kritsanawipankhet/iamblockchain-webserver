@@ -35,25 +35,20 @@ type Props = {
   children?: React.ReactNode;
 };
 
-let provider: keyof walletConnectType;
 declare let window: any;
-let activate: any;
-let active: boolean;
-let library: any;
-let account: string | undefined | null;
 let route: NextRouter;
+
+let provider: keyof walletConnectType;
+let activate: any;
+let deactivate: any;
 
 export default function DeveloperLayout({ children }: Props) {
   route = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { chainId, deactivate, error } = useWeb3React();
-  const [sidebar, setSidebar] = useState(false);
-  library = useWeb3React().library;
-  activate = useWeb3React().activate;
-  active = useWeb3React().active;
-  account = useWeb3React().account;
-
+  const { active, account } = useWeb3React();
   const [network, setNetwork] = useState(undefined);
+  deactivate = useWeb3React().deactivate;
+  activate = useWeb3React().activate;
 
   const refreshState = () => {
     window.localStorage.setItem("provider", undefined);
@@ -71,6 +66,7 @@ export default function DeveloperLayout({ children }: Props) {
       activate(connectors[provider]);
     }
   }, []);
+
   return (
     <>
       <Head>
@@ -101,7 +97,12 @@ export default function DeveloperLayout({ children }: Props) {
                 <a
                   className={`${Index.HeaderLink} ${Styles.dFlex} ${Styles.flexJustifyCenter} ${Styles.flexItemsCenter} ${Styles.flexGap3} ${Styles.mr2}`}
                 >
-                  <Image src="/iam.svg" width="48" height="48" />
+                  <Image
+                    src="/iam.svg"
+                    width="48"
+                    height="48"
+                    alt="IAMBlockchain"
+                  />
                   <span className={`${Index.BannerText} `}>
                     IAMBLOCKCHAIN Developer
                   </span>
@@ -150,7 +151,12 @@ export default function DeveloperLayout({ children }: Props) {
                 <a
                   className={`${Index.HeaderLink} ${Styles.dFlex} ${Styles.dMdNone} ${Styles.flexItemsCenter} ${Styles.flexGap3}`}
                 >
-                  <Image src="/iam.svg" width="48" height="48" />
+                  <Image
+                    src="/iam.svg"
+                    width="48"
+                    height="48"
+                    alt="IAMBlockchain"
+                  />
                 </a>
               </Link>
             </div>

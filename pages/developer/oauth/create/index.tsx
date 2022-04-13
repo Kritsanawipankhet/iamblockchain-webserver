@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { DeveloperLayout } from "@/components/layouts/developer";
 import { useWeb3React } from "@web3-react/core";
-import { useRouter, NextRouter } from "next/router";
 import { LockIcon } from "@/components/icon";
 import Index from "@/styles/dev.oauth.module.css";
 import Styles from "@/styles/styles.module.css";
+import {
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  FormHelperText,
+  Input,
+  Textarea,
+  Button,
+  ButtonGroup,
+} from "@chakra-ui/react";
+import Link from "next/link";
 
 type Props = {};
 
 export default function OAuthCreate({}: Props) {
-  const { active, chainId, deactivate, error } = useWeb3React();
-  const route: NextRouter = useRouter();
+  const { active, account } = useWeb3React();
   return (
     <DeveloperLayout>
       {active ? (
@@ -23,7 +32,57 @@ export default function OAuthCreate({}: Props) {
             </h1>
           </div>
           <div className={Index.divider}></div>
-          <div></div>
+          <div>
+            <form>
+              <FormControl mt={6} mb={3} isRequired>
+                <FormLabel htmlFor="application-name">
+                  Application name
+                </FormLabel>
+                <Input id="application-name" placeholder="Application name" />
+                <FormHelperText>
+                  Something users will recognize and trust.
+                </FormHelperText>
+              </FormControl>
+              <FormControl mb={3} isRequired>
+                <FormLabel htmlFor="homepage-url">Homepage URL</FormLabel>
+                <Input id="homepage-url" placeholder="Homepage URL" />
+                <FormHelperText>
+                  The full URL to your application homepage.
+                </FormHelperText>
+              </FormControl>
+              <FormControl mb={3}>
+                <FormLabel htmlFor="application-description">
+                  Application description
+                </FormLabel>
+                <Textarea
+                  id="application-description"
+                  placeholder="Application description is optional"
+                />
+                <FormHelperText>
+                  This is displayed to all users of your application.
+                </FormHelperText>
+              </FormControl>
+              <FormControl mb={6} isRequired>
+                <FormLabel htmlFor="authorization-callback-url">
+                  Authorization callback URL
+                </FormLabel>
+                <Input
+                  id="authorization-callback-url"
+                  placeholder="Authorization callback URL"
+                />
+                <FormHelperText>
+                  Your application’s callback URL. Read our OAuth documentation
+                  for more information.
+                </FormHelperText>
+              </FormControl>
+              <ButtonGroup spacing="4">
+                <Button colorScheme="blue">Register Application</Button>
+                <Link href="/developer/oauth" passHref>
+                  <Button>Cancel</Button>
+                </Link>
+              </ButtonGroup>
+            </form>
+          </div>
         </div>
       ) : (
         <div
@@ -43,3 +102,8 @@ export default function OAuthCreate({}: Props) {
     </DeveloperLayout>
   );
 }
+
+const createClient = async (_e: any) => {
+  _e.preventDefault;
+  console.log(_e);
+};

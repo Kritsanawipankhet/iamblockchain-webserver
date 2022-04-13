@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { DeveloperLayout } from "@/components/layouts/developer";
 import Index from "@/styles/dev.oauth.module.css";
 import Styles from "@/styles/styles.module.css";
+import { useWeb3React } from "@web3-react/core";
 
 type Props = {};
 
 export default function Developer({}: Props) {
+  const { deactivate, activate, active, account } = useWeb3React();
+
   return (
     <DeveloperLayout>
       <div
