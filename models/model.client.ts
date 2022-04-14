@@ -17,6 +17,7 @@ export interface ICreateClient {
   client_id: string;
   client_secret: string;
   client_name: string;
+  client_logo: string;
   client_homepage: string;
   client_description?: string;
   redirect_uri: string;

@@ -40,6 +40,7 @@ export default function SelectWalletModal({ isOpen, closeModal }: Props) {
   const setProvider = (type: any) => {
     window.localStorage.setItem("provider", type);
   };
+  let number = parseInt(process.env.SUPPORT_CHAIN_ID);
 
   const metamaskConnectWallet = async () => {
     const provider = await detectEthereumProvider();
@@ -50,7 +51,7 @@ export default function SelectWalletModal({ isOpen, closeModal }: Props) {
       });
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: "0x3" }],
+        params: [{ chainId: `0x${number.toString(16)}` }],
       });
 
       activate(connectors.injected);
@@ -61,11 +62,9 @@ export default function SelectWalletModal({ isOpen, closeModal }: Props) {
             method: "wallet_addEthereumChain",
             params: [
               {
-                chainId: "0x3",
-                chainName: "Ropsten",
-                rpcUrls: [
-                  "https://ropsten.infura.io/v3/81a30e2706b04f5489a74021a6a5ff42",
-                ],
+                chainId: `0x${number.toString(16)}`,
+                chainName: process.env.CHAIN_NAME,
+                rpcUrls: [process.env.ETHEREUM_NETWORK],
               },
             ],
           });

@@ -7,6 +7,9 @@ import { ICreateClient } from "@/models/.";
 import crypto from "crypto";
 import { v4 as uuid } from "uuid";
 import { Formik } from "formik";
+import { toSvg } from "jdenticon";
+import { ethers } from "ethers";
+import Abi from "@/ethereum/abi/IAM.json";
 
 import {
   FormControl,
@@ -22,9 +25,20 @@ import Link from "next/link";
 import PermissionDenied from "@/components/Developer/PermissionDenied";
 
 type Props = {};
+declare let window: any;
+let activate: any;
+let active: boolean;
+let library: any;
+let account: string | undefined | null;
 
 export default function OAuthCreate({}: Props) {
-  const { active, account } = useWeb3React();
+  const { chainId, deactivate, error } = useWeb3React();
+  const [color, setColor] = useState("#000000ff");
+  library = useWeb3React().library;
+  activate = useWeb3React().activate;
+  active = useWeb3React().active;
+  account = useWeb3React().account;
+  useEffect(() => setColor(setBg()), []);
 
   if (active) {
     return (
@@ -45,6 +59,7 @@ export default function OAuthCreate({}: Props) {
                 homepageUrl: "",
                 applicationDescription: "",
                 applicationCallbackUrl: "",
+                logoBgColor: color,
               }}
               validate={(values) => {
                 const errors: any = {};
@@ -229,20 +244,60 @@ export default function OAuthCreate({}: Props) {
 }
 
 const createClientSubmit = async (_values: any) => {
-  const seed = crypto.randomBytes(256);
-  const code = crypto.createHash("sha1").update(seed).digest("hex");
+  const clientId = uuid();
+  const clientLogo = toSvg(clientId, 100, {
+    lightness: {
+      color: [1.0, 1.0],
+      grayscale: [1.0, 1.0],
+    },
+    saturation: {
+      color: 1.0,
+      grayscale: 0.0,
+    },
+    backColor: _values.logoBgColor,
+  });
 
   const credentialsClient: ICreateClient = {
-    client_id: uuid(),
+    client_id: clientId,
     client_secret: makeClientSecret(32),
     client_name: _values.applicationName,
+    client_logo: Buffer.from(
+      `data:image/svg+xml;base64,${Buffer.from(clientLogo).toString("base64")}`
+    ).toString("base64"),
     client_homepage: _values.homepageUrl,
     client_description: _values.applicationDescription,
     redirect_uri: _values.applicationCallbackUrl,
   };
 
-  console.log(credentialsClient);
-  alert(JSON.stringify(credentialsClient, null, 2));
+  if (active) {
+    const IAMContract: ethers.Contract = new ethers.Contract(
+      process.env.IAM_CONTRACT_ADDRESS,
+      Abi.abi,
+      library
+    );
+    const signer = library.getSigner();
+    try {
+      const createClientTx = await IAMContract.connect(signer).createClient(
+        credentialsClient.client_id,
+        credentialsClient.client_secret,
+        credentialsClient.client_name,
+        credentialsClient.client_logo,
+        credentialsClient.client_description,
+        credentialsClient.client_homepage,
+        credentialsClient.redirect_uri
+      );
+      console.log(`Data Transfer : ${JSON.stringify(credentialsClient)}`);
+      console.log("Tx : ", createClientTx);
+      const receipt = await createClientTx.wait();
+      console.log("Receipt : ", receipt);
+    } catch (_e: any) {
+      console.log(_e);
+    }
+    // console.log(library);
+    // console.log(IAMContract);
+  }
+  // console.log(credentialsClient);
+  // alert(JSON.stringify(credentialsClient, null, 2));
 };
 
 const makeClientSecret = (length: number): string => {
@@ -263,4 +318,9 @@ const regExpUrl = (url: string): boolean => {
   return !/^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(
     url
   );
+};
+
+const setBg = (): string => {
+  const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+  return "#" + randomColor;
 };

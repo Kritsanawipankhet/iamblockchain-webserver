@@ -17,7 +17,6 @@ import {
   OAuthRedirect,
 } from "@/components/OAuth";
 import Link from "next/link";
-import { permissionType } from "@/models/.";
 import LoadingOverlay from "@/components/LoadingOverlay";
 
 type Props = {
@@ -51,8 +50,6 @@ export default function Authorize({ client, params }: Props) {
                 clientOwner={client.client_owner}
               ></OAuthUser>
               <OAuthChain></OAuthChain>
-              {/* <OAuthPermission></OAuthPermission>
-              <OAuthPermission type={permissionType.Task}></OAuthPermission> */}
             </div>
             <div
               className={`${Index.BoxFooter} ${Styles.p3} ${Styles.pMd4} ${Styles.clearfix}`}

@@ -229,7 +229,6 @@ export default function DeveloperLayout({ children }: Props) {
                     <MenuDivider />
                     <MenuGroup title="Help">
                       <MenuItem>Docs</MenuItem>
-                      <MenuItem>FAQ</MenuItem>
                     </MenuGroup>
                     <MenuDivider />
                     <MenuItem onClick={disconnect}>
