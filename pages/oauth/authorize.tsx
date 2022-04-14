@@ -80,6 +80,7 @@ export default function Authorize({ client, params }: Props) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryParams = context.query as TAuthorize;
+  console.log(queryParams);
   let client: TClient = await ethersGetClientById(queryParams.client_id);
   // if (queryParams.redirect_uri) {
   //   if (queryParams.redirect_uri != client.redirect_uri) {

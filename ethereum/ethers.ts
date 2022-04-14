@@ -64,4 +64,5 @@ const errorType = (error: string): number => {
     return 500;
   }
 };
+
 export { ethersGetClientById };
