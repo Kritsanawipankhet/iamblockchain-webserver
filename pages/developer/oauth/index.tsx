@@ -83,7 +83,7 @@ export default function Developer({}: Props) {
     };
 
     getEventList().catch(console.error);
-  }, []);
+  }, [account]);
 
   if (active) {
     return (
