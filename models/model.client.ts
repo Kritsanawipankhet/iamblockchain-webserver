@@ -1,7 +1,7 @@
 export type TClient = {
   client_name: string;
   client_secret: string;
-  clieet_logo: string;
+  client_logo: string;
   client_description: string;
   client_homepage: string;
   redirect_uri: string;

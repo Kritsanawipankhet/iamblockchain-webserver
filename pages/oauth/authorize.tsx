@@ -35,7 +35,7 @@ export default function Authorize({ client, params }: Props) {
       <LoadingOverlay Loading={loading}></LoadingOverlay>
       <div className={Styles.mxAuto} style={{ maxWidth: "530px" }}>
         <div className={`${Styles.px3} ${Styles.pt6}`}>
-          <OAuthDashedConnection />
+          <OAuthDashedConnection applicationLogo={client.client_logo} />
           <h2
             className={`${Styles.m0} ${Styles.f2} ${Styles.textNormal} ${Styles.textCenter} ${Styles.lhCondensed}  ${Styles.mb4}`}
           >
@@ -55,7 +55,9 @@ export default function Authorize({ client, params }: Props) {
               className={`${Index.BoxFooter} ${Styles.p3} ${Styles.pMd4} ${Styles.clearfix}`}
             >
               <OAuthAuthorize></OAuthAuthorize>
-              <OAuthRedirect redirectUri={client.redirect_uri}></OAuthRedirect>
+              <OAuthRedirect
+                redirectUri={client.client_homepage}
+              ></OAuthRedirect>
             </div>
           </div>
           <OAuthClientDescription
@@ -77,7 +79,6 @@ export default function Authorize({ client, params }: Props) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryParams = context.query as TAuthorize;
-  console.log(queryParams);
   let client: TClient = await ethersGetClientById(queryParams.client_id);
   // if (queryParams.redirect_uri) {
   //   if (queryParams.redirect_uri != client.redirect_uri) {

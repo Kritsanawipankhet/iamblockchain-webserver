@@ -25,9 +25,9 @@ import {
   HambergurIcon,
 } from "@/components/icon/";
 import { useWeb3React } from "@web3-react/core";
-import { connectors } from "@/components/connectors";
+import { connectors } from "@/components/Connectors";
 import { useRouter, type NextRouter } from "next/router";
-import SelectWalletModal from "@/components/connectors/Modal";
+import SelectWalletModal from "@/components/Connectors/Modal";
 import { truncateAddress } from "@/libs/string";
 
 type Props = {

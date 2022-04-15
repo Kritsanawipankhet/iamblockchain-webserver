@@ -7,8 +7,6 @@ import { useWeb3React } from "@web3-react/core";
 type Props = {};
 
 export default function Developer({}: Props) {
-  const { deactivate, activate, active, account } = useWeb3React();
-
   return (
     <DeveloperLayout>
       <div

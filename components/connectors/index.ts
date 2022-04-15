@@ -26,7 +26,7 @@ const WalletConnect = new WalletConnectConnector({
 });
 
 const Injected = new InjectedConnector({
-  supportedChainIds: [parseInt(process.env.SUPPORT_CHAIN_ID) || 3],
+  supportedChainIds: [parseInt(process.env.SUPPORT_CHAIN_ID)],
 });
 
 export const connectors = {

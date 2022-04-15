@@ -163,7 +163,7 @@ export default function OAuthCreate({}: Props) {
                       </FormHelperText>
                     )}
                   </FormControl>
-                  <FormControl mb={3}>
+                  <FormControl mb={3} isRequired>
                     <FormLabel htmlFor="applicationDescription">
                       Application description
                     </FormLabel>
@@ -283,8 +283,8 @@ const createClientSubmit = async (_values: any) => {
         credentialsClient.client_name,
         credentialsClient.client_logo,
         credentialsClient.client_description,
-        credentialsClient.client_homepage,
-        credentialsClient.redirect_uri
+        credentialsClient.client_homepage.toLowerCase(),
+        credentialsClient.redirect_uri.toLowerCase()
       );
       console.log(`Data Transfer : ${JSON.stringify(credentialsClient)}`);
       console.log("Tx : ", createClientTx);

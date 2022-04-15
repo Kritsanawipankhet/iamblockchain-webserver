@@ -17,3 +17,73 @@
 .btnCreateOAuth {
   border-radius: 999px;
 }
+
+.CircleBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0 3px 6px rgba(140, 149, 159, 0.15);
+}
+
+.CircleBadgeMedium {
+  width: 64px;
+  height: 64px;
+}
+
+.CircleBadgeSmall {
+  width: 56px;
+  height: 56px;
+}
+
+.CircleBadgeIcon {
+  max-width: 60% !important;
+  height: auto !important;
+  max-height: 55% !important;
+}
+
+.CircleEmphasis {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+}
+
+.Avatar {
+  display: inline-block;
+  overflow: hidden;
+  line-height: 1;
+  vertical-align: middle;
+  background-color: #ffffff;
+  border-radius: 6px;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 1px rgba(27, 31, 36, 0.15);
+}
+
+.AvatarUser {
+  border-radius: 50% !important;
+}
+.ClientList {
+  margin-top: 20px;
+}
+.ClientList ul {
+  list-style-type: none;
+}
+.ClientList ul li {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.ClientName {
+  color: #007bff;
+  font-size: 16px;
+  font-weight: 600;
+}
+.ClientName:hover {
+  text-decoration: underline;
+}
+
+.ClientDescription {
+  font-size: 14px;
+  font-weight: 300;
+}

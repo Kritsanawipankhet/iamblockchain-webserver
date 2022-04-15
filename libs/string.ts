@@ -12,10 +12,6 @@ export const shortAddressEth = (address?: string): string => {
   throw new Error("Empty string");
 };
 
-export const urlDomainFormat = (url: string): string => {
-  return url.slice(0, url.lastIndexOf("/"));
-};
-
 export const truncateAddress = (address: string) => {
   if (!address) return "";
   const match = address.match(
