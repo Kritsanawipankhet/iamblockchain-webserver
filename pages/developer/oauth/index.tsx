@@ -6,11 +6,13 @@ import { LayerIcon, LockIcon } from "@/components/icon";
 import { useWeb3React } from "@web3-react/core";
 import Link from "next/link";
 import { PermissionDenied, NoApplication } from "@/components/Developer/";
-type Props = {};
+
 import { ethers } from "ethers";
 import Abi from "@/ethereum/abi/IAM.json";
 import Image from "next/image";
 import { FacebookIcon, GithubIcon } from "@/components/icon";
+
+type Props = {};
 
 let activate: any;
 let active: boolean;
@@ -58,9 +60,9 @@ export default function Developer({}: Props) {
               _v.args._client_id
             );
             setClientList((clientList: any) => [...clientList, _client]);
-            console.log(_client);
+            //  console.log(_client);
           } catch (_error: any) {
-            console.log(_error);
+            //console.log(_error);
           }
         });
 

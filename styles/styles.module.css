@@ -26,6 +26,9 @@
 .borderBottom0 {
   border-bottom: 0 !important;
 }
+.colorTheme {
+  color: #007bff !important;
+}
 /* Color */
 .colorFgDefault {
   color: #24292f !important;
@@ -442,4 +445,8 @@
 .pResponsive {
   padding-right: 32px !important;
   padding-left: 32px !important;
+}
+
+.cPointer {
+  cursor: pointer;
 }

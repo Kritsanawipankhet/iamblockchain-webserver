@@ -3,6 +3,10 @@
   font-weight: 600;
 }
 
+.TitleAppPage {
+  font-size: 24px;
+  font-weight: 600;
+}
 @media (min-width: 768px) {
   .TitlePage {
     font-size: 24px;
@@ -94,4 +98,29 @@
 .ClientDescription {
   font-size: 14px;
   font-weight: 300;
+}
+
+.clientIdTitle {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.clientIdText {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.clientSecretTitle {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.clientSecretText {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.countUserText {
+  font-size: 16px;
+  font-weight: 500;
 }

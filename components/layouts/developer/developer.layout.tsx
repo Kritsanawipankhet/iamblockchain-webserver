@@ -43,6 +43,7 @@ let deactivate: any;
 let ref: any;
 export default function DeveloperLayout({ children }: Props) {
   route = useRouter();
+  console.log(route);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { active, account } = useWeb3React();
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -149,7 +150,7 @@ export default function DeveloperLayout({ children }: Props) {
                   className={`${Index.HeaderLink} ${
                     route.pathname === "/developer/oauth" ||
                     route.pathname === "/developer/oauth/create" ||
-                    route.pathname === "/developer/oauth/client/"
+                    route.pathname === "/developer/oauth/client/[client_id]"
                       ? Index.active
                       : ""
                   }`}
@@ -273,7 +274,8 @@ export default function DeveloperLayout({ children }: Props) {
                   <li
                     className={
                       route.pathname === "/developer/oauth" ||
-                      route.pathname === "/developer/oauth/create"
+                      route.pathname === "/developer/oauth/create" ||
+                      route.pathname === "/developer/oauth/client/[client_id]"
                         ? Index.active
                         : ""
                     }
