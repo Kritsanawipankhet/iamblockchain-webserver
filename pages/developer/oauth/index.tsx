@@ -95,7 +95,7 @@ export default function Developer({}: Props) {
         <div className={Index.divider}></div>
         <div className={`${Index.ClientList}`}>
           <ul>
-            {clientList ? (
+            {clientList.length > 0 ? (
               clientList.map((client: any, index: any) => (
                 <li className={``} key={index}>
                   <div

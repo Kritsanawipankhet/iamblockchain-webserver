@@ -1,8 +1,17 @@
 const path = require("path");
+const TerserPlugin = require("terser-webpack-plugin");
 require("dotenv").config();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  mode: "production",
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        /* additional options here */
+      }),
+    ],
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
