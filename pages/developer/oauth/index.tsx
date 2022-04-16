@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { DeveloperLayout } from "@/components/layouts/developer";
 import Index from "@/styles/dev.oauth.module.css";
 import Styles from "@/styles/styles.module.css";
@@ -25,37 +25,24 @@ export default function Developer({}: Props) {
   active = useWeb3React().active;
   account = useWeb3React().account;
   const [clientList, setClientList] = useState<any>([]);
+  IAMContract = new ethers.Contract(
+    process.env.IAM_CONTRACT_ADDRESS,
+    Abi.abi,
+    library
+  );
+
   useEffect(() => {
+    setClientList([]);
     const getEventList = async () => {
       if (account) {
-        setClientList([]);
-        IAMContract = new ethers.Contract(
-          process.env.IAM_CONTRACT_ADDRESS,
-          Abi.abi,
-          library
-        );
-
         signer = library.getSigner();
 
-        const filterAddClient = IAMContract.filters.AddClient(
-          ethers.utils.getAddress(account),
-          null,
-          null
-        );
-        const filterDelClient = IAMContract.filters.DelClient(
-          ethers.utils.getAddress(account),
-          null,
-          null
-        );
         const eventAddClient = await IAMContract.queryFilter(
-          filterAddClient,
-          0,
-          "latest"
+          IAMContract.filters.AddClient(ethers.utils.getAddress(account))
         );
+
         const eventDelClient = await IAMContract.queryFilter(
-          filterDelClient,
-          0,
-          "latest"
+          IAMContract.filters.DelClient(ethers.utils.getAddress(account))
         );
 
         const list = eventAddClient.filter(
@@ -64,12 +51,14 @@ export default function Developer({}: Props) {
               (e2: any) => e1.args._client_id === e2.args._client_id
             )
         );
+
         list.forEach(async (_v: any) => {
           try {
             let _client = await IAMContract.connect(signer).getClientByOwner(
               _v.args._client_id
             );
             setClientList((clientList: any) => [...clientList, _client]);
+            console.log(_client);
           } catch (_error: any) {
             console.log(_error);
           }
@@ -106,70 +95,57 @@ export default function Developer({}: Props) {
         <div className={Index.divider}></div>
         <div className={`${Index.ClientList}`}>
           <ul>
-            <li className={``}>
-              <div
-                className={`${Styles.dFlex} ${Styles.flexItemsCenter} ${Styles.flexGap3}`}
-              >
-                <Link href="/developer/oauth/client/">
-                  <a>
-                    <FacebookIcon
-                      className={`${Styles.Octicon}`}
-                      width={64}
-                      height={64}
-                    />
-                  </a>
-                </Link>
-                <div className={`${Styles.widthFull}`}>
-                  <Link href="/developer/oauth/client/">
-                    <a className={`${Index.ClientName}`}>IAM To Do</a>
-                  </Link>
-                  <p className={`${Index.ClientDescription}`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Voluptatum nobis aspernatur laboriosam labore, minima
-                    inventore!
-                  </p>
-                </div>
-              </div>
-            </li>
-            <li className={``}>
-              <div
-                className={`${Styles.dFlex} ${Styles.flexItemsCenter} ${Styles.flexGap3}`}
-              >
-                <GithubIcon
-                  className={`${Styles.Octicon}`}
-                  width={64}
-                  height={64}
-                />
-                <div className={`${Styles.widthFull}`}>
-                  <p className={`${Index.ClientName}`}>IAM To Do</p>
-                  <p className={`${Index.ClientDescription}`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Commodi, atque.
-                  </p>
-                </div>
-              </div>
-            </li>
-            <li className={``}>
-              <div
-                className={`${Styles.dFlex} ${Styles.flexItemsCenter} ${Styles.flexGap3}`}
-              >
-                <FacebookIcon
-                  className={`${Styles.Octicon}`}
-                  width={64}
-                  height={64}
-                />
-                <div className={`${Styles.widthFull}`}>
-                  <p className={`${Index.ClientName}`}>IAM To Do</p>
-                  <p className={`${Index.ClientDescription}`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Commodi, atque.
-                  </p>
-                </div>
-              </div>
-            </li>
             {clientList ? (
               clientList.map((client: any, index: any) => (
-                <li key={index}>{client.client_id}</li>
+                <li className={``} key={index}>
+                  <div
+                    className={`${Styles.dFlex} ${Styles.flexItemsStart} ${Styles.flexGap3}`}
+                  >
+                    <div
+                      className={`${Index.CircleBadgeMedium} ${Styles.overflowHidden}`}
+                    >
+                      {client.client_logo ? (
+                        <Link
+                          href={`/developer/oauth/client/${client.client_id}`}
+                        >
+                          <a>
+                            <Image
+                              src={Buffer.from(
+                                client.client_logo,
+                                "base64"
+                              ).toString("ascii")}
+                              width={64}
+                              height={64}
+                              alt="Application"
+                              className={`${Index.AvatarUser} `}
+                            />
+                          </a>
+                        </Link>
+                      ) : (
+                        <Image
+                          src="/eth.png"
+                          alt="Etheruem"
+                          width={64}
+                          height={64}
+                          className={`${Index.AvatarUser} `}
+                        />
+                      )}
+                    </div>
+
+                    <div className={`${Styles.widthFull}`}>
+                      <Link
+                        href={`/developer/oauth/client/${client.client_id}`}
+                      >
+                        <a className={`${Index.ClientName}`}>
+                          {client.client_name}
+                        </a>
+                      </Link>
+                      <p className={`${Index.ClientDescription}`}>
+                        {client.client_description}
+                      </p>
+                    </div>
+                  </div>
+                </li>
               ))
             ) : (
               <NoApplication></NoApplication>

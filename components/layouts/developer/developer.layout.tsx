@@ -27,7 +27,7 @@ import {
 import { useWeb3React } from "@web3-react/core";
 import { connectors } from "@/components/Connectors";
 import { useRouter, type NextRouter } from "next/router";
-import SelectWalletModal from "@/components/Connectors/Modal";
+import SelectWalletModal from "@/components/Connectors/modal";
 import { truncateAddress } from "@/libs/string";
 
 type Props = {
@@ -148,7 +148,8 @@ export default function DeveloperLayout({ children }: Props) {
                 <a
                   className={`${Index.HeaderLink} ${
                     route.pathname === "/developer/oauth" ||
-                    route.pathname === "/developer/oauth/create"
+                    route.pathname === "/developer/oauth/create" ||
+                    route.pathname === "/developer/oauth/client/"
                       ? Index.active
                       : ""
                   }`}

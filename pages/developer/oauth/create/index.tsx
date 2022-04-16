@@ -218,8 +218,10 @@ export default function OAuthCreate({}: Props) {
                   </FormControl>
                   <ButtonGroup spacing="4">
                     <Button
-                      colorScheme="blue"
+                      backgroundColor="#007bff"
+                      color="#ffffff"
                       type="submit"
+                      _hover={{ backgroundColor: "#0069d9" }}
                       disabled={isSubmitting}
                     >
                       Register Application

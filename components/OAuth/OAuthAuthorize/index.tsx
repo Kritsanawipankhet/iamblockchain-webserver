@@ -5,7 +5,7 @@ import Styles from "@/styles/styles.module.css";
 import { WalletIcon } from "@/components/icon/";
 import { useDisclosure } from "@chakra-ui/react";
 import { useWeb3React } from "@web3-react/core";
-import SelectWalletModal from "@/components/Connectors/Modal";
+import SelectWalletModal from "@/components/Connectors/modal";
 import { connectors } from "@/components/Connectors";
 import crypto from "crypto";
 import { ethers } from "ethers";

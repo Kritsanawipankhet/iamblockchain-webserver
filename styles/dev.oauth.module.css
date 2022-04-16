@@ -1,6 +1,13 @@
 .TitlePage {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .TitlePage {
+    font-size: 24px;
+    font-weight: 600;
+  }
 }
 
 .TitlePageMedium {
@@ -62,6 +69,7 @@
 .AvatarUser {
   border-radius: 50% !important;
 }
+
 .ClientList {
   margin-top: 20px;
 }
