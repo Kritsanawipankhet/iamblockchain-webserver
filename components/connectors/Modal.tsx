@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/react";
 import { useWeb3React, UnsupportedChainIdError } from "@web3-react/core";
-import { connectors } from "./";
+import { connectors } from ".";
 import detectEthereumProvider from "@metamask/detect-provider";
 
 type Props = {

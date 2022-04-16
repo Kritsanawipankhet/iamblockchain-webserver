@@ -27,7 +27,7 @@ import {
 import { useWeb3React } from "@web3-react/core";
 import { connectors } from "@/components/connectors";
 import { useRouter, type NextRouter } from "next/router";
-import SelectWalletModal from "@/components/connectors/modal";
+import SelectWalletModal from "@/components/connectors/Modal";
 import { truncateAddress } from "@/libs/string";
 
 type Props = {
