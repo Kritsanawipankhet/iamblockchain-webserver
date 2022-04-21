@@ -42,12 +42,10 @@ let activate: any;
 let deactivate: any;
 let ref: any;
 export default function DeveloperLayout({ children }: Props) {
-  route = useRouter();
-  console.log(route);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { active, account } = useWeb3React();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
+  route = useRouter();
   const [network, setNetwork] = useState(undefined);
   deactivate = useWeb3React().deactivate;
   activate = useWeb3React().activate;

@@ -20,11 +20,12 @@ let active: boolean;
 let library: any;
 let account: string | undefined | null;
 let route: NextRouter;
-
+let code: string;
 export default function OAuthAuthorize({}: Props) {
   route = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { chainId, deactivate, error } = useWeb3React();
+  const [receipt, getReceipt] = useState();
   library = useWeb3React().library;
   activate = useWeb3React().activate;
   active = useWeb3React().active;
@@ -47,6 +48,51 @@ export default function OAuthAuthorize({}: Props) {
       activate(connectors[provider]);
     }
   }, []);
+
+  const createAuthorize = async (e: any) => {
+    e.preventDefault();
+    const seed = crypto.randomBytes(256);
+    code = crypto.createHash("sha1").update(seed).digest("hex");
+    const expires = 3600 * 24 * 30;
+    if (active) {
+      const IAMContract: ethers.Contract = new ethers.Contract(
+        process.env.IAM_CONTRACT_ADDRESS,
+        Abi.abi,
+        library
+      );
+      const signer = library.getSigner();
+      try {
+        const authorizeTx = await IAMContract.connect(signer).createAuthorize(
+          route.query.client_id,
+          code,
+          [route.query.scope],
+          route.query.redirect_uri || "",
+          expires
+        );
+        console.log(
+          `Data Transfer : ${route.query.client_id} ,  ${code} , ${[
+            "",
+          ]} , ${expires}`
+        );
+        console.log("Tx : ", authorizeTx);
+        getReceipt(await authorizeTx.wait());
+
+        //console.log("Receipt : ", receipt);
+      } catch (_e: any) {
+        console.log(_e);
+      }
+      // console.log(library);
+      // console.log(IAMContract);
+    }
+  };
+
+  useEffect(() => {
+    if (receipt) {
+      console.log("get ", receipt);
+      window.location.href = `${route.query.redirect_uri}?code=${code}&state=${route.query.state}`;
+    }
+  }, [receipt]);
+
   if (active)
     return (
       <>
@@ -98,39 +144,3 @@ export default function OAuthAuthorize({}: Props) {
     </>
   );
 }
-
-const createAuthorize = async (e: any) => {
-  e.preventDefault();
-  const seed = crypto.randomBytes(256);
-  const code = crypto.createHash("sha1").update(seed).digest("hex");
-  const expires = 3600 * 24 * 30;
-  if (active) {
-    const IAMContract: ethers.Contract = new ethers.Contract(
-      process.env.IAM_CONTRACT_ADDRESS,
-      Abi.abi,
-      library
-    );
-    const signer = library.getSigner();
-    try {
-      const authorizeTx = await IAMContract.connect(signer).createAuthorize(
-        route.query.client_id,
-        code,
-        [""],
-        route.query.redirect_uri || "",
-        expires
-      );
-      console.log(
-        `Data Transfer : ${route.query.client_id} ,  ${code} , ${[
-          "",
-        ]} , ${expires}`
-      );
-      console.log("Tx : ", authorizeTx);
-      const receipt = await authorizeTx.wait();
-      console.log("Receipt : ", receipt);
-    } catch (_e: any) {
-      console.log(_e);
-    }
-    console.log(library);
-    console.log(IAMContract);
-  }
-};

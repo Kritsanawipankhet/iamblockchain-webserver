@@ -6,14 +6,17 @@ import { LayerIcon, LockIcon } from "@/components/icon";
 import { useWeb3React } from "@web3-react/core";
 import Link from "next/link";
 import { PermissionDenied, NoApplication } from "@/components/Developer/";
-
+import { walletConnectType } from "@/models/.";
 import { ethers } from "ethers";
 import Abi from "@/ethereum/abi/IAM.json";
 import Image from "next/image";
 import { FacebookIcon, GithubIcon } from "@/components/icon";
+import { connectors } from "@/components/connectors";
 
 type Props = {};
 
+let provider: keyof walletConnectType;
+declare let window: any;
 let activate: any;
 let active: boolean;
 let library: any;
@@ -35,7 +38,7 @@ export default function Developer({}: Props) {
 
   useEffect(() => {
     setClientList([]);
-    const getEventList = async () => {
+    const eventList = async () => {
       if (account) {
         signer = library.getSigner();
 
@@ -54,28 +57,31 @@ export default function Developer({}: Props) {
             )
         );
 
-        list.forEach(async (_v: any) => {
+        list.map(async (_v: any) => {
           try {
             let _client = await IAMContract.connect(signer).getClientByOwner(
               _v.args._client_id
             );
             setClientList((clientList: any) => [...clientList, _client]);
-            //  console.log(_client);
+
+            //console.log(_client);
           } catch (_error: any) {
             //console.log(_error);
           }
         });
-
-        // console.log(filterAddClient);
-        // console.log("AddEvent : ", eventAddClient);
-        // console.log("DelEvent : ", eventDelClient);
-        // console.log("List ", list);
       }
     };
 
-    getEventList().catch(console.error);
+    eventList().catch(console.error);
   }, [account]);
 
+  useEffect(() => {
+    provider = window.localStorage.getItem("provider");
+
+    if (provider) {
+      activate(connectors[provider]);
+    }
+  }, []);
   if (active) {
     return (
       <DeveloperLayout>

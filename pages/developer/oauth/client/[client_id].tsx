@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { DeveloperLayout } from "@/components/layouts/developer";
 import { GetServerSideProps } from "next";
 import Index from "@/styles/dev.oauth.module.css";
@@ -8,6 +8,8 @@ import { useWeb3React } from "@web3-react/core";
 import Abi from "@/ethereum/abi/IAM.json";
 import { ethers } from "ethers";
 import { InvalidApplication } from "@/components/Developer/";
+import { walletConnectType } from "@/models/.";
+import { connectors } from "@/components/connectors";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -32,13 +34,14 @@ import { regExpAppname, regExpUrl, truncateAddress } from "@/libs/string";
 type Props = {
   client_id: string;
 };
-
+let provider: keyof walletConnectType;
+declare let window: any;
 let activate: any;
 let active: boolean;
 let library: any;
-let account: any;
+let account: string | null | undefined;
 let IAMContract: ethers.Contract;
-let signer: any;
+let signer: any | undefined;
 
 export default function Client({ client_id }: Props) {
   library = useWeb3React().library;
@@ -61,7 +64,7 @@ export default function Client({ client_id }: Props) {
             client_id
           );
           setClient(_client);
-          console.log(_client);
+          //console.log(_client);
         } catch (_error: any) {
           setClient(null);
         }
@@ -70,7 +73,16 @@ export default function Client({ client_id }: Props) {
 
     getClient().catch(console.error);
   }, [account]);
-  if (client) {
+
+  useEffect(() => {
+    provider = window.localStorage.getItem("provider");
+
+    if (provider) {
+      activate(connectors[provider]);
+    }
+  }, []);
+
+  if (active && client) {
     return (
       <DeveloperLayout>
         <div
@@ -84,20 +96,16 @@ export default function Client({ client_id }: Props) {
           separator={<ChevronRightIcon color="gray.500" />}
         >
           <BreadcrumbItem>
-            <Link href={`/developer/oauth/`}>
-              <a>
-                <BreadcrumbLink>OAuth Apps</BreadcrumbLink>
-              </a>
+            <Link href={`/developer/oauth/`} passHref>
+              <BreadcrumbLink>OAuth Apps</BreadcrumbLink>
             </Link>
           </BreadcrumbItem>
 
           <BreadcrumbItem>
-            <Link href={`/developer/oauth/client/${client.client_id}`}>
-              <a>
-                <BreadcrumbLink color="#007bff">
-                  {client.client_name}
-                </BreadcrumbLink>
-              </a>
+            <Link href={`/developer/oauth/client/${client.client_id}`} passHref>
+              <BreadcrumbLink color="#007bff">
+                {client.client_name}
+              </BreadcrumbLink>
             </Link>
           </BreadcrumbItem>
         </Breadcrumb>
@@ -113,12 +121,21 @@ export default function Client({ client_id }: Props) {
           <span
             className={`${Styles.colorTheme} ${Styles.mr1} ${Styles.cPointer}`}
           >
-            <Tooltip
-              label={ethers.utils.getAddress(client.client_owner)}
-              placement="right"
+            <Link
+              href={`https://ropsten.etherscan.io/address/${client.client_owner}`}
+              passHref
             >
-              {truncateAddress(ethers.utils.getAddress(client.client_owner))}
-            </Tooltip>
+              <a target="_blank">
+                <Tooltip
+                  label={ethers.utils.getAddress(client.client_owner)}
+                  placement="right"
+                >
+                  {truncateAddress(
+                    ethers.utils.getAddress(client.client_owner)
+                  )}
+                </Tooltip>
+              </a>
+            </Link>
           </span>
           owns this application
         </div>
@@ -137,10 +154,19 @@ export default function Client({ client_id }: Props) {
           </p>
         </div>
         <div>
-          <p className={Index.clientSecretTitle}>Client Secrets</p>
-          <p className={`${Index.clientSecretText} ${Styles.cPointer}`}>
-            {client.client_secret}
-          </p>
+          <div
+            className={`${Styles.dFlex} ${Styles.flexItemsCenter} ${Styles.flexJustifyBetween}`}
+          >
+            <p className={Index.clientSecretTitle}>Client Secrets</p>
+            <Button size="sm" variant="solid">
+              Renew client secret
+            </Button>
+          </div>
+          <div className={`${Index.clientSecretContent} ${Styles.mt3}`}>
+            <p className={`${Index.clientSecretText}`}>
+              {client.client_secret}
+            </p>
+          </div>
         </div>
         <div>
           <Formik
