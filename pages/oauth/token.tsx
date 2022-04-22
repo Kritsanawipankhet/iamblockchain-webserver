@@ -13,7 +13,7 @@ export default function Token({}: Props) {
   // }, []);
   return (
     <div>
-      <form method="post" action="https://iamblockchain.vercel.app/api/user">
+      <form method="post" action="http://localhost:3000/api/user">
         <button type="submit" value="submit">
           POST
         </button>
