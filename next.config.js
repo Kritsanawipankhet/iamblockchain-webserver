@@ -35,12 +35,7 @@ const nextConfig = {
       {
         source: "/",
         destination: "/developer",
-        permanent: false,
-      },
-      {
-        source: "/api/oauth/token",
-        destination: "/api/oauth/token",
-        permanent: false,
+        permanent: true,
       },
     ];
   },

@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { GetServerSideProps } from "next";
 
 type Props = {};
 
 export default function Token({}: Props) {
+  // useEffect(() => {
+  //   const user = async () => {
+  //     const response = await fetch("/api/books");
+  //     const data = await response.json();
+  //     console.log(data);
+  //   };
+  // }, []);
   return (
     <div>
-      <form method="post" action="http://iamtodo.vercel.app/">
+      <form method="post" action="https://iamblockchain.vercel.app/api/user">
         <button type="submit" value="submit">
           POST
         </button>

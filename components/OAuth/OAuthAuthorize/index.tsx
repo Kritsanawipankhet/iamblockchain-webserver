@@ -11,7 +11,9 @@ import crypto from "crypto";
 import { ethers } from "ethers";
 import Abi from "@/ethereum/abi/IAM.json";
 import Index from "./index.module.css";
-type Props = {};
+type Props = {
+  redirectUri: string;
+};
 
 let provider: keyof walletConnectType;
 declare let window: any;
@@ -21,7 +23,7 @@ let library: any;
 let account: string | undefined | null;
 let route: NextRouter;
 let code: string;
-export default function OAuthAuthorize({}: Props) {
+export default function OAuthAuthorize({ redirectUri }: Props) {
   route = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { chainId, deactivate, error } = useWeb3React();
@@ -123,7 +125,13 @@ export default function OAuthAuthorize({}: Props) {
         className={`${Styles.dFlex} ${Styles.flexJustifyCenter} ${Styles.flexGap2}`}
       >
         <button
-          onClick={() => {}}
+          onClick={() => {
+            if (route.query.redirect_uri) {
+              window.location.href = `${route.query.redirect_uri}`;
+            } else {
+              window.location.href = `${redirectUri}`;
+            }
+          }}
           type="button"
           className={`${Styles.btn} ${Styles.btn} ${Styles.widthFull} ${Styles.wsNormal} ${Index.btnAuthorize}`}
         >

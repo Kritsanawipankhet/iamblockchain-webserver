@@ -54,7 +54,9 @@ export default function Authorize({ client, params }: Props) {
             <div
               className={`${Index.BoxFooter} ${Styles.p3} ${Styles.pMd4} ${Styles.clearfix}`}
             >
-              <OAuthAuthorize></OAuthAuthorize>
+              <OAuthAuthorize
+                redirectUri={client.redirect_uri}
+              ></OAuthAuthorize>
               <OAuthRedirect
                 redirectUri={client.client_homepage}
               ></OAuthRedirect>
