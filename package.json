@@ -22,6 +22,7 @@
     "@web3-react/core": "^6.1.9",
     "@web3-react/injected-connector": "^6.0.7",
     "@web3-react/walletconnect-connector": "^6.2.13",
+    "cookies-next": "^2.0.4",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "emotion-theming": "^11.0.0",

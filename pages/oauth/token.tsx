@@ -1,24 +1,18 @@
 import React, { useEffect } from "react";
 import { GetServerSideProps } from "next";
+import Head from "next/head";
 
 type Props = {};
 
 export default function Token({}: Props) {
-  // useEffect(() => {
-  //   const user = async () => {
-  //     const response = await fetch("/api/books");
-  //     const data = await response.json();
-  //     console.log(data);
-  //   };
-  // }, []);
   return (
-    <div>
-      <form method="post" action="http://localhost:3000/api/user">
-        <button type="submit" value="submit">
-          POST
-        </button>
-      </form>
-    </div>
+    <>
+      <Head>
+        <title>IAM To do - IAMBLOCKCHAIN</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <div>{JSON.stringify({ id: 5555 })}</div>
+    </>
   );
 }
 
