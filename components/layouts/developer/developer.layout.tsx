@@ -91,7 +91,7 @@ export default function DeveloperLayout({ children }: Props) {
         <title>Developer application - IAMBLOCKCHAIN</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div className={`${Index.body} `}>
+      <div className={`${Index.body}  ${Index.bodyBackground} `}>
         <div className={`${Index.Navbar}`} ref={ref}>
           <div
             className={`${Index.Header} ${Styles.mxAuto} ${Styles.px3} ${Styles.pxMd4} ${Styles.pxLg5} ${Styles.flexWrap} ${Styles.flexMdNowrap}`}
@@ -140,23 +140,46 @@ export default function DeveloperLayout({ children }: Props) {
                 </a>
               </Link>
             </div>
-            <div
-              className={`${Index.HeaderItem} ${Styles.mtN1} ${Styles.mbN1} ${Styles.dMdFlex} ${Styles.dNone}  ${Styles.mx2}`}
-            >
-              <Link href="/developer/oauth">
-                <a
-                  className={`${Index.HeaderLink} ${
-                    route.pathname === "/developer/oauth" ||
-                    route.pathname === "/developer/oauth/create" ||
-                    route.pathname === "/developer/oauth/client/[client_id]"
-                      ? Index.active
-                      : ""
-                  }`}
-                >
-                  OAuth App
-                </a>
-              </Link>
-            </div>
+            {active ? (
+              <div
+                className={`${Index.HeaderItem} ${Styles.mtN1} ${Styles.mbN1} ${Styles.dMdFlex} ${Styles.dNone}  ${Styles.mx2}`}
+              >
+                <Link href="/developer/oauth">
+                  <a
+                    className={`${Index.HeaderLink} ${
+                      route.pathname === "/developer/oauth" ||
+                      route.pathname === "/developer/oauth/create" ||
+                      route.pathname === "/developer/oauth/client/[client_id]"
+                        ? Index.active
+                        : ""
+                    }`}
+                  >
+                    OAuth App
+                  </a>
+                </Link>
+              </div>
+            ) : (
+              ``
+            )}
+            {active ? (
+              <div
+                className={`${Index.HeaderItem} ${Styles.mtN1} ${Styles.mbN1} ${Styles.dMdFlex} ${Styles.dNone}  ${Styles.mx2}`}
+              >
+                <Link href="/developer/account">
+                  <a
+                    className={`${Index.HeaderLink} ${
+                      route.pathname === "/developer/account"
+                        ? Index.active
+                        : ""
+                    }`}
+                  >
+                    Account Management
+                  </a>
+                </Link>
+              </div>
+            ) : (
+              ``
+            )}
             <div
               className={`${Index.HeaderItem} ${Styles.mtN1} ${Styles.mbN1} ${Styles.dMdFlex} ${Styles.dNone}  ${Styles.mx2}`}
             >
@@ -170,6 +193,7 @@ export default function DeveloperLayout({ children }: Props) {
                 </a>
               </Link>
             </div>
+
             <div
               className={`${Index.HeaderItem} ${Styles.mtN1} ${Styles.mbN1} ${Styles.dMdNone} ${Styles.dFlex}`}
             ></div>
@@ -263,25 +287,50 @@ export default function DeveloperLayout({ children }: Props) {
                   </li>
                 </a>
               </Link>
-              <Link href="/developer/oauth">
-                <a
-                  onClick={() => {
-                    setSidebarOpen(false);
-                  }}
-                >
-                  <li
-                    className={
-                      route.pathname === "/developer/oauth" ||
-                      route.pathname === "/developer/oauth/create" ||
-                      route.pathname === "/developer/oauth/client/[client_id]"
-                        ? Index.active
-                        : ""
-                    }
+              {active ? (
+                <Link href="/developer/oauth">
+                  <a
+                    onClick={() => {
+                      setSidebarOpen(false);
+                    }}
                   >
-                    OAuth App
-                  </li>
-                </a>
-              </Link>
+                    <li
+                      className={
+                        route.pathname === "/developer/oauth" ||
+                        route.pathname === "/developer/oauth/create" ||
+                        route.pathname === "/developer/oauth/client/[client_id]"
+                          ? Index.active
+                          : ""
+                      }
+                    >
+                      OAuth App
+                    </li>
+                  </a>
+                </Link>
+              ) : (
+                ""
+              )}
+              {active ? (
+                <Link href="/developer/account">
+                  <a
+                    onClick={() => {
+                      setSidebarOpen(false);
+                    }}
+                  >
+                    <li
+                      className={
+                        route.pathname === "/developer/account"
+                          ? Index.active
+                          : ""
+                      }
+                    >
+                      Account Management
+                    </li>
+                  </a>
+                </Link>
+              ) : (
+                ""
+              )}
               <Link href="/developer/docs">
                 <a
                   onClick={() => {
@@ -302,7 +351,7 @@ export default function DeveloperLayout({ children }: Props) {
         </div>
 
         <div
-          className={`${Index.Container} ${Styles.pResponsive} ${Styles.clearfix}`}
+          className={`${Index.Container} ${Styles.pResponsive} ${Styles.clearfix} `}
         >
           {children}
         </div>

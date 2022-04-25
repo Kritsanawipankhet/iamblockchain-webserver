@@ -23,11 +23,19 @@ import {
   Textarea,
   Button,
   ButtonGroup,
+  IconButton,
   Tooltip,
+  Flex,
+  Spacer,
 } from "@chakra-ui/react";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 import { Formik } from "formik";
-import { ChevronRightIcon } from "@chakra-ui/icons";
+import {
+  ChevronRightIcon,
+  ViewOffIcon,
+  ViewIcon,
+  DeleteIcon,
+} from "@chakra-ui/icons";
 import Link from "next/link";
 import { regExpAppname, regExpUrl, truncateAddress } from "@/libs/string";
 
@@ -49,6 +57,8 @@ export default function Client({ client_id }: Props) {
   active = useWeb3React().active;
   account = useWeb3React().account;
   const [client, setClient] = useState<any>();
+  const [showSecret, setShowSecret] = useState(false);
+
   IAMContract = new ethers.Contract(
     process.env.IAM_CONTRACT_ADDRESS,
     Abi.abi,
@@ -89,6 +99,16 @@ export default function Client({ client_id }: Props) {
           className={`${Styles.dFlex} ${Styles.flexItemsCenter} ${Styles.flexJustifyBetween}`}
         >
           <h1 className={Index.TitleAppPage}>{client?.client_name}</h1>
+          <Link href="#" passHref>
+            <Button
+              leftIcon={<DeleteIcon />}
+              colorScheme="red"
+              size="sm"
+              variant="outline"
+            >
+              Delete OAuth App
+            </Button>
+          </Link>
         </div>
         <div className={Index.divider}></div>
         <Breadcrumb
@@ -163,9 +183,23 @@ export default function Client({ client_id }: Props) {
             </Button>
           </div>
           <div className={`${Index.clientSecretContent} ${Styles.mt3}`}>
-            <p className={`${Index.clientSecretText}`}>
-              {client.client_secret}
-            </p>
+            <Flex align="center">
+              <span className={`${Index.clientSecretText}`}>
+                {showSecret
+                  ? client.client_secret
+                  : "Client secret are hidden for secuiry. "}
+              </span>
+              <Spacer />
+              <IconButton
+                onClick={() => {
+                  setShowSecret(!showSecret);
+                }}
+                size="md"
+                aria-label="Show Secret"
+                variant="ghost"
+                icon={showSecret ? <ViewIcon /> : <ViewOffIcon />}
+              />
+            </Flex>
           </div>
         </div>
         <div>

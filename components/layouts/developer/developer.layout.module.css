@@ -1,6 +1,5 @@
 .body {
   color: #2c3e50;
-
   min-height: 100vh;
 }
 
@@ -108,6 +107,7 @@
   width: 100%;
   position: fixed;
   bottom: 0;
+  background-color: #fff;
 }
 
 /* .Space {

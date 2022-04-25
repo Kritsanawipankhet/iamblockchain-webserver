@@ -88,7 +88,10 @@ export default function Developer({}: Props) {
         <div
           className={`${Styles.dFlex} ${Styles.flexItemsCenter} ${Styles.flexJustifyBetween}`}
         >
-          <h1 className={Index.TitlePage}>OAuth Apps</h1>
+          <div>
+            <h1 className={Index.TitlePage}>OAuth Apps</h1>
+            <p className={Index.SubTitlePage}>Applications that you have</p>
+          </div>
           <Link href="/developer/oauth/create">
             <a>
               <button
@@ -103,7 +106,33 @@ export default function Developer({}: Props) {
         <div className={Index.divider}></div>
         <div className={`${Index.ClientList}`}>
           <ul>
-            {clientList.length > 0 ? (
+            <li className={``}>
+              <div
+                className={`${Styles.dFlex} ${Styles.flexItemsStart} ${Styles.flexGap3}`}
+              >
+                <div
+                  className={`${Index.CircleBadgeMedium} ${Styles.overflowHidden}`}
+                >
+                  <Image
+                    src="/iam.svg"
+                    alt="IAM"
+                    width={64}
+                    height={64}
+                    className={`${Index.AvatarUser} `}
+                  />
+                </div>
+
+                <div className={`${Styles.widthFull}`}>
+                  <Link href={`/developer/oauth/client/`}>
+                    <a className={`${Index.ClientName}`}>{"IAM To do"}</a>
+                  </Link>
+                  <p className={`${Index.ClientDescription}`}>
+                    {`IAM To do Authentication Apps`}
+                  </p>
+                </div>
+              </div>
+            </li>
+            {/* {clientList.length > 0 ? (
               clientList.map((client: any, index: any) => (
                 <li className={``} key={index}>
                   <div
@@ -157,7 +186,7 @@ export default function Developer({}: Props) {
               ))
             ) : (
               <NoApplication></NoApplication>
-            )}
+            )} */}
           </ul>
         </div>
       </DeveloperLayout>
