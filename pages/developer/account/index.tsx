@@ -8,7 +8,7 @@ import {
   NoApplicationAccess,
   RemoveAccessModalConfirm,
 } from "@/components/Developer/";
-import { Flex, Spacer, Button, Divider, useDisclosure } from "@chakra-ui/react";
+import { Button, useDisclosure } from "@chakra-ui/react";
 
 type Props = {};
 
@@ -51,7 +51,7 @@ export default function Account({}: Props) {
               </div>
 
               <div className={`${Styles.widthFull}`}>
-                <Flex align="center">
+                <div className={`${Index.accessList}`}>
                   <div>
                     <Link href={`/developer/oauth/client/`}>
                       <a className={`${Index.ClientName}`}>{"IAM To do"}</a>
@@ -67,7 +67,6 @@ export default function Account({}: Props) {
                       className={`${Index.ClientGrantAccessTime}`}
                     >{`Access given on: Yesterday, 12:26 PM`}</p>
                   </div>
-                  <Spacer />
                   <Button
                     onClick={onRemoveOpen}
                     size="sm"
@@ -76,7 +75,7 @@ export default function Account({}: Props) {
                   >
                     REMOVE ACCESS
                   </Button>
-                </Flex>
+                </div>
               </div>
             </div>
           </li>
@@ -101,7 +100,7 @@ export default function Account({}: Props) {
               </div>
 
               <div className={`${Styles.widthFull}`}>
-                <Flex align="center">
+                <div className={`${Index.accessList}`}>
                   <div>
                     <Link href={`/developer/oauth/client/`}>
                       <a className={`${Index.ClientName}`}>
@@ -119,11 +118,10 @@ export default function Account({}: Props) {
                       className={`${Index.ClientGrantAccessTime}`}
                     >{`Access given on: April 21, 12:07 PM`}</p>
                   </div>
-                  <Spacer />
                   <Button size="sm" variant="outline" colorScheme="blue">
                     REMOVE ACCESS
                   </Button>
-                </Flex>
+                </div>
               </div>
             </div>
           </li>

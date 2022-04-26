@@ -8,10 +8,6 @@ First, run the development server:
 npm run dev
 # or
 yarn dev
-```
-## Deploy to Google Cloud Run
-
-[![Run on Google Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run)
 
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
