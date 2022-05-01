@@ -40,6 +40,7 @@
     "react-fade-in": "^2.0.1",
     "react-jazzicon": "^1.0.3",
     "sharp": "^0.30.3",
+    "sweetalert2": "^11.4.10",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

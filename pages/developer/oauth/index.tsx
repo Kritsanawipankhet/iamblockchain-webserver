@@ -106,7 +106,7 @@ export default function Developer({}: Props) {
         <div className={Index.divider}></div>
         <div className={`${Index.ClientList}`}>
           <ul>
-            <li className={``}>
+            {/* <li className={``}>
               <div
                 className={`${Styles.dFlex} ${Styles.flexItemsStart} ${Styles.flexGap3}`}
               >
@@ -131,8 +131,8 @@ export default function Developer({}: Props) {
                   </p>
                 </div>
               </div>
-            </li>
-            {/* {clientList.length > 0 ? (
+            </li> */}
+            {clientList.length > 0 ? (
               clientList.map((client: any, index: any) => (
                 <li className={``} key={index}>
                   <div
@@ -186,7 +186,7 @@ export default function Developer({}: Props) {
               ))
             ) : (
               <NoApplication></NoApplication>
-            )} */}
+            )}
           </ul>
         </div>
       </DeveloperLayout>

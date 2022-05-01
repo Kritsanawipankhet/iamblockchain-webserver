@@ -17,7 +17,6 @@ import {
   OAuthRedirect,
 } from "@/components/OAuth";
 import Link from "next/link";
-import LoadingOverlay from "@/components/LoadingOverlay";
 
 type Props = {
   client: TClient;
@@ -32,7 +31,6 @@ export default function Authorize({ client, params }: Props) {
 
   return (
     <AuthLayout>
-      <LoadingOverlay Loading={loading}></LoadingOverlay>
       <div className={Styles.mxAuto} style={{ maxWidth: "530px" }}>
         <div className={`${Styles.px3} ${Styles.pt6}`}>
           <OAuthDashedConnection applicationLogo={client.client_logo} />
