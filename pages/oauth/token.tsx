@@ -96,7 +96,7 @@ export default function Authorize({ client, params }: Props) {
           route.query.code,
           makeClientSecret(64),
           makeClientSecret(64),
-          "user",
+          ["user"],
           expires
         );
         // console.log(
