@@ -216,7 +216,7 @@ export default function Authorize({ client, params }: Props) {
                     >
                       <WalletIcon
                         className={`${Styles.colorFgOnEmphasis} ${Styles.Octicon}`}
-                      />
+                      />{" "}
                       Connect Wallet
                     </button>
                   </div>

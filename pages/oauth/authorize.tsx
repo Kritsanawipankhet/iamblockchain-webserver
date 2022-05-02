@@ -194,7 +194,11 @@ export default function Authorize({ client, params }: Props) {
                   >
                     <button
                       onClick={() => {
-                        window.location.href = `${route.query.redirect_uri}`;
+                        if (route.query.redirect_uri) {
+                          window.location.href = `${route.query.redirect_uri}`;
+                        } else {
+                          window.location.href = `${client.redirect_uri}`;
+                        }
                       }}
                       type="button"
                       className={`${Styles.btn} ${Styles.btn} ${Styles.widthFull} ${Styles.wsNormal} ${Index.btnAuthorize}`}
