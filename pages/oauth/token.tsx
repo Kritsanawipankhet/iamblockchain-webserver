@@ -96,7 +96,7 @@ export default function Authorize({ client, params }: Props) {
           route.query.code,
           makeClientSecret(64),
           makeClientSecret(64),
-          [route.query.scope],
+          "user",
           expires
         );
         // console.log(
@@ -113,7 +113,11 @@ export default function Authorize({ client, params }: Props) {
           if (receipt) {
             console.log("Receipt : ", receipt);
 
-            window.location.href = `${route.query.redirect_uri}?client_id=${route.query.client_id}&scope=${route.query.scope}&redirect_uri=${route.query.redirect_uri}&code=${route.query.code}&state=${route.query.state}`;
+            window.location.href = `${client.redirect_uri}?client_id=${
+              route.query.client_id
+            }&scope=${"user"}&redirect_uri=${client.redirect_uri}&code=${
+              route.query.code
+            }&state=${route.query.state}`;
             //setLoading(false);
           }
         }, 1000);

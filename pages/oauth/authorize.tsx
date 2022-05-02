@@ -93,8 +93,8 @@ export default function Authorize({ client, params }: Props) {
           route.query.client_id,
           code,
           code,
-          [route.query.scope],
-          route.query.redirect_uri || "",
+          ["user"],
+          client.redirect_uri,
           expires
         );
         // console.log(
@@ -111,7 +111,11 @@ export default function Authorize({ client, params }: Props) {
           if (receipt) {
             console.log("Receipt : ", receipt);
 
-            window.location.href = `${route.query.redirect_uri}?client_id=${route.query.client_id}&scope=${route.query.scope}&redirect_uri=${route.query.redirect_uri}&code=${code}&state=${route.query.state}`;
+            window.location.href = `${client.redirect_uri}?client_id=${
+              route.query.client_id
+            }&scope=${"user"}&redirect_uri=${
+              client.redirect_uri
+            }&code=${code}&state=${route.query.state}`;
           }
         }, 1000);
 
