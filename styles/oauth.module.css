@@ -19,3 +19,12 @@
   border-top-width: 1px;
   border-radius: 0 0 6px 6px;
 }
+
+.btnAuthorize {
+  border-radius: 6px;
+}
+
+.btnAuthorize:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

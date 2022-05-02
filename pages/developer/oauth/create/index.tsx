@@ -111,6 +111,7 @@ export default function OAuthCreate({}: Props) {
           }
         }, 1000);
       } catch (_e: any) {
+        setLoading(false);
         console.log(_e);
       }
       // console.log(library);
@@ -125,8 +126,14 @@ export default function OAuthCreate({}: Props) {
       <DeveloperLayout>
         {loading ? (
           <FadeIn>
-            <div style={{ display: "flex" }}>
-              <Lottie animationData={loadingData} loop autoplay />
+            <div className={Styles.loadingContent}>
+              <Lottie
+                animationData={loadingData}
+                loop
+                autoplay
+                width="80"
+                height="80"
+              />
             </div>
           </FadeIn>
         ) : (

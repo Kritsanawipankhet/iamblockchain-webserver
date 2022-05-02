@@ -38,19 +38,19 @@ export default function OAuthUser({ clientName, clientOwner }: Props) {
         {" by "}
         <strong>
           <Link
-            href={`https://rinkeby.etherscan.io/address/${clientOwner}`}
+            href={`https://ropsten.etherscan.io/address/${clientOwner}`}
             passHref
           >
-            <Tooltip
+            {/* <Tooltip
               label={ethers.utils.getAddress(clientOwner || "")}
               placement="right"
-            >
-              <a target="_blank">
-                {clientOwner
-                  ? truncateAddress(ethers.utils.getAddress(clientOwner))
-                  : ""}
-              </a>
-            </Tooltip>
+            > */}
+            <a target="_blank">
+              {clientOwner
+                ? truncateAddress(ethers.utils.getAddress(clientOwner))
+                : ""}
+            </a>
+            {/* </Tooltip> */}
           </Link>
         </strong>
         <small className={`${Styles.dBlock} ${Styles.colorFgMutes}`}>
@@ -61,19 +61,19 @@ export default function OAuthUser({ clientName, clientOwner }: Props) {
             : `Please connect your wallet account.`}
           {active ? (
             <Link
-              href={`https://rinkeby.etherscan.io/address/${account}`}
+              href={`https://ropsten.etherscan.io/address/${account}`}
               passHref
             >
-              <Tooltip
+              {/* <Tooltip
                 label={ethers.utils.getAddress(account || "")}
                 placement="right"
-              >
-                <a target="_blank">
-                  <strong>
-                    {truncateAddress(ethers.utils.getAddress(account || ""))}
-                  </strong>
-                </a>
-              </Tooltip>
+              > */}
+              <a target="_blank">
+                <strong>
+                  {truncateAddress(ethers.utils.getAddress(account || ""))}
+                </strong>
+              </a>
+              {/* </Tooltip> */}
             </Link>
           ) : (
             ""

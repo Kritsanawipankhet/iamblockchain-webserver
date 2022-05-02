@@ -5,6 +5,7 @@ import {
   CircleSlashIcon,
   ClockIcon,
   OrganizationIcon,
+  EmphasisIcon,
 } from "@/components/icon/";
 
 import moment from "moment";
@@ -14,6 +15,7 @@ type Props = {
   createDate?: number;
   usersCount?: number;
   usersCountString?: string;
+  clientId?: any;
 };
 
 export default function OAuthClientDescription({
@@ -21,18 +23,30 @@ export default function OAuthClientDescription({
   createDate = 0,
   usersCount,
   usersCountString = "Fewer than 10 ",
+  clientId,
 }: Props) {
   return (
     <div
       className={`${Index.Box} ${Styles.colorBgSubtle} ${Styles.px4} ${Styles.py3} ${Styles.mt3} ${Styles.textSmall} ${Styles.colorFgMutes} ${Styles.clearfix} ${Styles.dFlex} ${Styles.flexGap3} ${Styles.flexJustifyBetween}`}
     >
-      <div className={`${Styles.dFlex} ${Styles.flexGap2}`}>
-        <CircleSlashIcon className={`${Styles.Octicon}`}></CircleSlashIcon>
-        <div>
-          <strong>Not </strong>
-          <span>owned or operated by IAM</span>
+      {clientId === process.env.CLIENT_OP ? (
+        <div className={`${Styles.dFlex} ${Styles.flexGap2}`}>
+          <EmphasisIcon className={`${Styles.Octicon}`}></EmphasisIcon>
+          <div>
+            <strong>Owned</strong>
+            <span> or operated by IAM</span>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className={`${Styles.dFlex} ${Styles.flexGap2}`}>
+          <CircleSlashIcon className={`${Styles.Octicon}`}></CircleSlashIcon>
+          <div>
+            <strong>Not </strong>
+            <span>owned or operated by IAM</span>
+          </div>
+        </div>
+      )}
+
       <div className={`${Styles.dFlex} ${Styles.flexGap2}`}>
         <ClockIcon className={`${Styles.Octicon}`}></ClockIcon>
         <div>

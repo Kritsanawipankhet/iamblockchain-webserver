@@ -43,11 +43,11 @@ export default function Developer({}: Props) {
         signer = library.getSigner();
 
         const eventAddClient = await IAMContract.queryFilter(
-          IAMContract.filters.AddClient(ethers.utils.getAddress(account))
+          IAMContract.filters.AddClient(ethers.utils.getAddress(account), null)
         );
 
         const eventDelClient = await IAMContract.queryFilter(
-          IAMContract.filters.DelClient(ethers.utils.getAddress(account))
+          IAMContract.filters.DelClient(ethers.utils.getAddress(account), null)
         );
 
         const list = eventAddClient.filter(
@@ -58,6 +58,7 @@ export default function Developer({}: Props) {
         );
 
         list.map(async (_v: any) => {
+          console.log(_v);
           try {
             let _client = await IAMContract.connect(signer).getClientByOwner(
               _v.args._client_id
@@ -141,7 +142,39 @@ export default function Developer({}: Props) {
                     <div
                       className={`${Index.CircleBadgeMedium} ${Styles.overflowHidden}`}
                     >
-                      {client.client_logo ? (
+                      {client.client_id === process.env.CLIENT_OP ? (
+                        <Link
+                          href={`/developer/oauth/client/${client.client_id}`}
+                        >
+                          <a>
+                            <Image
+                              src="/iam.svg"
+                              alt="IAM"
+                              width={64}
+                              height={64}
+                              className={`${Index.AvatarUser} `}
+                            />
+                          </a>
+                        </Link>
+                      ) : (
+                        <Link
+                          href={`/developer/oauth/client/${client.client_id}`}
+                        >
+                          <a>
+                            <Image
+                              src={Buffer.from(
+                                client.client_logo,
+                                "base64"
+                              ).toString("ascii")}
+                              width={64}
+                              height={64}
+                              alt="Application"
+                              className={`${Index.AvatarUser} `}
+                            />
+                          </a>
+                        </Link>
+                      )}
+                      {/* {client.client_logo ? (
                         <Link
                           href={`/developer/oauth/client/${client.client_id}`}
                         >
@@ -166,7 +199,7 @@ export default function Developer({}: Props) {
                           height={64}
                           className={`${Index.AvatarUser} `}
                         />
-                      )}
+                      )} */}
                     </div>
 
                     <div className={`${Styles.widthFull}`}>

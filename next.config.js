@@ -49,6 +49,28 @@ const nextConfig = {
     TZ: process.env.TZ,
     SUPPORT_CHAIN_ID: process.env.SUPPORT_CHAIN_ID,
     CHAIN_NAME: process.env.CHAIN_NAME,
+    CLIENT_OP: process.env.CLIENT_OP,
+  },
+  async headers() {
+    return [
+      {
+        // matching all API routes
+        source: "/:path*",
+        headers: [
+          { key: "Access-Control-Allow-Credentials", value: "true" },
+          { key: "Access-Control-Allow-Origin", value: "*" },
+          {
+            key: "Access-Control-Allow-Methods",
+            value: "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+          },
+          {
+            key: "Access-Control-Allow-Headers",
+            value:
+              "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+          },
+        ],
+      },
+    ];
   },
   // images: {
   //   domains: ["avatars.githubusercontent.com"],

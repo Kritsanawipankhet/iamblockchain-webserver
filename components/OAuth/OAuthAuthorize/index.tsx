@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { walletConnectType } from "@/models/.";
+
 import { useRouter, NextRouter } from "next/router";
 import Styles from "@/styles/styles.module.css";
 import { WalletIcon } from "@/components/icon/";
 import { useDisclosure } from "@chakra-ui/react";
 import { useWeb3React } from "@web3-react/core";
+import { walletConnectType } from "@/models/.";
 import SelectWalletModal from "@/components/connectors/Modal";
 import { connectors } from "@/components/connectors";
 import crypto from "crypto";
@@ -28,6 +29,7 @@ export default function OAuthAuthorize({ redirectUri }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { chainId, deactivate, error } = useWeb3React();
   const [receipt, getReceipt] = useState();
+  const [btnDisable, setBtnDisable] = useState(false);
   library = useWeb3React().library;
   activate = useWeb3React().activate;
   active = useWeb3React().active;
@@ -71,29 +73,33 @@ export default function OAuthAuthorize({ redirectUri }: Props) {
           route.query.redirect_uri || "",
           expires
         );
-        console.log(
-          `Data Transfer : ${route.query.client_id} ,  ${code} , ${[
-            "",
-          ]} , ${expires}`
-        );
-        console.log("Tx : ", authorizeTx);
-        getReceipt(await authorizeTx.wait());
+        // console.log(
+        //   `Data Transfer : ${route.query.client_id} ,  ${code} , ${[
+        //     "",
+        //   ]} , ${expires}`
+        // );
+        //console.log("Tx : ", authorizeTx);
+
+        setBtnDisable(true);
+
+        const receipt = await authorizeTx.wait();
+        setTimeout(() => {
+          if (receipt) {
+            console.log("Receipt : ", receipt);
+            window.location.href = `${route.query.redirect_uri}?client_id=${route.query.client_id}&scope=${route.query.scope}&redirect_uri=${route.query.redirect_uri}&code=${code}&state=${route.query.state}`;
+            setBtnDisable(false);
+          }
+        }, 1000);
 
         //console.log("Receipt : ", receipt);
       } catch (_e: any) {
+        setBtnDisable(false);
         console.log(_e);
       }
       // console.log(library);
       // console.log(IAMContract);
     }
   };
-
-  useEffect(() => {
-    if (receipt) {
-      console.log("get ", receipt);
-      window.location.href = `${route.query.redirect_uri}?code=${code}&state=${route.query.state}`;
-    }
-  }, [receipt]);
 
   if (active)
     return (
@@ -103,6 +109,7 @@ export default function OAuthAuthorize({ redirectUri }: Props) {
             className={`${Styles.dFlex} ${Styles.flexJustifyCenter} ${Styles.flexGap2}`}
           >
             <button
+              disabled={btnDisable}
               type="button"
               onClick={disconnect}
               className={`${Styles.btn} ${Styles.btn} ${Styles.widthFull} ${Styles.wsNormal} ${Index.btnAuthorize}`}
@@ -111,6 +118,7 @@ export default function OAuthAuthorize({ redirectUri }: Props) {
             </button>
             <button
               type="submit"
+              disabled={btnDisable}
               className={`${Styles.textCenter} ${Styles.btn} ${Styles.btn} ${Styles.btnPrimary} ${Styles.widthFull} ${Styles.wsNormal} ${Styles.textSmall} ${Index.btnAuthorize}`}
             >
               Authorize

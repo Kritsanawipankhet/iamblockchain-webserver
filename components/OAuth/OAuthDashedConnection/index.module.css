@@ -1,3 +1,11 @@
+.DashedConnectionOnly {
+  position: relative;
+}
+
+.DashedConnectionOnly .CircleBadge {
+  position: relative;
+}
+
 .DashedConnection {
   position: relative;
 }
