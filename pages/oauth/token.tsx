@@ -113,7 +113,7 @@ export default function Authorize({ client, params }: Props) {
           if (receipt) {
             console.log("Receipt : ", receipt);
 
-            window.location.href = `${client.redirect_uri}?client_id=${
+            window.location.href = `${route.query.redirect_uri}?client_id=${
               route.query.client_id
             }&scope=${"user"}&redirect_uri=${client.redirect_uri}&code=${
               route.query.code
